@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="fileReader" class="ru.otus.lesson1HW.csv.CSVReaderImpl">
-        <property name="filePath" value="D:/OTUS_SpringFramework/OTUS_SpringFramework/Lesson1HW/questions.csv"/>
+        <property name="filePath" value="/questions.csv"/>
     </bean>
     <bean id="testClass" class="ru.otus.lesson1HW.service.Test">
         <constructor-arg name="reader" ref="fileReader"/>

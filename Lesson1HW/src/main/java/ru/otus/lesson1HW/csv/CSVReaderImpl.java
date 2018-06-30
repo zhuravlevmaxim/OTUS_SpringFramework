@@ -25,7 +25,7 @@ public class CSVReaderImpl implements ICSVReader {
 
     public List<Question> getQuestions() {
         List<Question> result = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(filePath),"utf-8"))) {
             String str;
             while((str = br.readLine()) != null ) {
                 String[] answers = str.split(";");
@@ -36,7 +36,6 @@ public class CSVReaderImpl implements ICSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return result;
     }
 }

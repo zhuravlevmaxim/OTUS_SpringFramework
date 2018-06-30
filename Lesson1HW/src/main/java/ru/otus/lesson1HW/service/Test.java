@@ -11,31 +11,35 @@ import java.util.Scanner;
 public class Test {
 
     private ICSVReader reader;
+    private int count;
+
     public Test(ICSVReader reader){
         this.reader = reader;
     }
 
     public void startTest(){
         String firstName, secondName;
-        Scanner sc = new Scanner(System.in);
-        List<Question> questions = reader.getQuestions();
-        System.out.println("Напишите вашу фамилию!");
-        secondName = sc.nextLine();
-        System.out.println("Напишите ваше имя!");
-        firstName = sc.nextLine();
-        System.out.println(secondName + " " +firstName + " ответьте на вопросы!");
-        int count = 0;
-        for(Question question : questions){
-            System.out.println(question.getQuestion());
-            if(sc.nextLine().equalsIgnoreCase(question.getAnswer())){
-                count++;
+        try(Scanner sc = new Scanner(System.in)) {
+            List<Question> questions = reader.getQuestions();
+            System.out.println("Напишите вашу фамилию!");
+            secondName = sc.nextLine();
+            System.out.println("Напишите ваше имя!");
+            firstName = sc.nextLine();
+            String name = secondName + " " + firstName;
+            System.out.println( name+ " ответьте на вопросы!");
+            for (Question question : questions) {
+                System.out.println(question.getQuestion());
+                if (sc.nextLine().equalsIgnoreCase(question.getAnswer())) {
+                    count++;
+                }
             }
+            if (count >= (questions.size() * 70) / 100) {
+                System.out.println(name + " вы сдали тест!");
+            } else {
+                System.out.println(name + " вы не сдали тест!");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
-        if(count >= 3){
-            System.out.println(secondName + " " +firstName + " вы сдали тест!");
-        }else{
-            System.out.println(secondName + " " +firstName + " вы не сдали тест!");
-        }
-        sc.close();
     }
 }
