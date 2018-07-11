@@ -70,7 +70,6 @@ public class Test {
         this.goodPercent = goodPercent;
     }
 
-
     public MessageSource getMessageSource() {
         return messageSource;
     }

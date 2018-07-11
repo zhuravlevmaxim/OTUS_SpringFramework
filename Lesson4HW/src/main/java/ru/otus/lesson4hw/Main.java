@@ -2,7 +2,7 @@ package ru.otus.lesson4hw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ApplicationContext;
 import ru.otus.lesson4hw.service.Test;
 
 /**
@@ -12,10 +12,8 @@ import ru.otus.lesson4hw.service.Test;
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
+        ApplicationContext context = SpringApplication.run(Main.class, args);
         Test test = context.getBean(Test.class);
         test.startTest();
-
     }
 }

@@ -1,8 +1,6 @@
 package ru.otus.lesson4hw.csv;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import ru.otus.lesson4hw.service.Question;
 
@@ -18,28 +16,20 @@ import java.util.*;
 @Component
 @ConfigurationProperties("application")
 public class CSVReaderImpl implements ICSVReader {
-    //@Value("${filePathRU}")
-    //private String filePathRU;
-    //@Value("${filePathEN}")
-    //private String filePathEN;
 
-    //@Value("${filesPath}")
     private String filesPath;
 
     public void setFilesPath(String filesPath) {
         this.filesPath = filesPath;
     }
 
+    public String getFilesPath() {
+        return filesPath;
+    }
+
+
     public List<Question> getQuestions(Locale locale) {
-
-        System.out.println("filesPath: "+filesPath);
-
-        List<Question> result = null;
-        if(locale.getDefault().equals(Locale.ENGLISH)){
-            result = getLocaleQuestions(getFilePathFromLocale(locale));
-        }else{
-            //result = getLocaleQuestions(filePathRU);
-        }
+        List<Question> result = getLocaleQuestions(getFilePathFromLocale(locale));
         return result;
     }
 
@@ -48,13 +38,13 @@ public class CSVReaderImpl implements ICSVReader {
         Map<String, String> pathMap = new HashMap<>();
         for(String path : filesPathM){
             String [] pathTMP = path.split(":");
-            pathMap.put(pathTMP[0], pathTMP[1]);
+            pathMap.put(pathTMP[0].toLowerCase(), pathTMP[1]);
         }
-        if(locale.equals(Locale.ENGLISH)){
-            return pathMap.get("EN");
+        if(locale.getDefault().equals(Locale.ENGLISH)){
+            return pathMap.get("en");
+        }else{
+            return pathMap.get("ru");
         }
-
-        return null;
     }
 
     private List<Question> getLocaleQuestions(String filePath){
@@ -72,13 +62,4 @@ public class CSVReaderImpl implements ICSVReader {
         }
         return result;
     }
-
-//    public String getFilePathRU() {
-//        return filePathRU;
-//    }
-//
-//    public String getFilePathEN() {
-//        return filePathEN;
-//    }
-
 }
