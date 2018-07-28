@@ -1,7 +1,7 @@
 package ru.otus.lesson6hw.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.otus.lesson6hw.dao.genre.GenreDaoJDBC;
+import ru.otus.lesson6hw.dao.genre.GenreJDBCOperations;
 import ru.otus.lesson6hw.domain.Genre;
 
 import java.util.List;
@@ -12,30 +12,30 @@ import java.util.List;
 public class GenreServiceImpl implements GenreService {
 
     @Autowired
-    private GenreDaoJDBC genreDaoJDBC;
+    private GenreJDBCOperations genreJDBCOperations;
 
     @Override
     public int count() {
-        return genreDaoJDBC.count();
+        return genreJDBCOperations.count();
     }
 
     @Override
     public Genre getById(int id) {
-        return genreDaoJDBC.getById(id);
+        return genreJDBCOperations.getById(id);
     }
 
     @Override
     public List<Genre> getAllGenre() {
-        return genreDaoJDBC.getAllGenre();
+        return genreJDBCOperations.getAllGenre();
     }
 
     @Override
     public void insert(int id, String genreName) {
-        genreDaoJDBC.insert(new Genre(id, genreName));
+        genreJDBCOperations.insert(new Genre(id, genreName));
     }
 
     @Override
     public void deleteById(int id) {
-        genreDaoJDBC.deleteById(id);
+        genreJDBCOperations.deleteById(id);
     }
 }
