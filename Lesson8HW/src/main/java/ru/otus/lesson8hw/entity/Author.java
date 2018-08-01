@@ -1,6 +1,7 @@
 package ru.otus.lesson8hw.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,8 +9,18 @@ import java.util.Objects;
  */
 @Entity
 @Table(name="author")
-public class Author {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Author  implements Serializable {
+
+    public Author(){}
+
+    public Author(String firstName, String secondName){
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
+
+
+    @Id
+    @GeneratedValue
     @Column(name="id")
     private long id;
 

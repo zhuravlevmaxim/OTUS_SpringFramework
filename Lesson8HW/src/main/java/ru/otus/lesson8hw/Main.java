@@ -2,6 +2,9 @@ package ru.otus.lesson8hw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import ru.otus.lesson8hw.entity.Author;
+import ru.otus.lesson8hw.repository.author.AuthorRepositoryJdbc;
 
 /**
  * Created by zhmv on 29.07.2018.
@@ -9,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
+        applicationContext.getBean(AuthorRepositoryJdbc.class).insert(new Author("firstName", "secondName"));
     }
 }

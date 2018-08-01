@@ -1,6 +1,7 @@
 package ru.otus.lesson8hw.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,9 +9,10 @@ import java.util.Set;
  * Created by zhmv on 30.07.2018.
  */
 @Entity
-@Table(name="table")
-public class Book {
+@Table(name="book")
+public class Book implements Serializable {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 

@@ -1,14 +1,16 @@
 package ru.otus.lesson8hw.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.io.Serializable;
 
 /**
  * Created by zhmv on 30.07.2018.
  */
 @Entity
 @Table(name="genre")
-public class Genre {
+public class Genre  implements Serializable {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
