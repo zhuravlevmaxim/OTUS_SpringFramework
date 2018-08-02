@@ -8,7 +8,7 @@ import java.util.Objects;
  * Created by zhmv on 30.07.2018.
  */
 @Entity
-@Table(name="author")
+@Table(name="author_table")
 public class Author  implements Serializable {
 
     public Author(){}
@@ -20,7 +20,7 @@ public class Author  implements Serializable {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
 
@@ -55,6 +55,14 @@ public class Author  implements Serializable {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @Override

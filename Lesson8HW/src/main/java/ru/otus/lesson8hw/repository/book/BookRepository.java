@@ -13,5 +13,4 @@ public interface BookRepository {
     public List<Book> getAll();
     public void deleteById(long id);
     public void insert(Book book);
-
 }

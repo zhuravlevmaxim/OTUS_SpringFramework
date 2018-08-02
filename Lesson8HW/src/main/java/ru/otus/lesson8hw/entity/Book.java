@@ -9,11 +9,11 @@ import java.util.Set;
  * Created by zhmv on 30.07.2018.
  */
 @Entity
-@Table(name="book")
+@Table(name="book_table")
 public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name="name")
@@ -32,4 +32,12 @@ public class Book implements Serializable {
     @JoinTable(name = "book_comments_detail", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
+
+    public void setComment(Comment comment){
+        this.comments.add(comment);
+    }
+
+    public void setGenre(Genre genre){
+        this.genres.add(genre);
+    }
 }

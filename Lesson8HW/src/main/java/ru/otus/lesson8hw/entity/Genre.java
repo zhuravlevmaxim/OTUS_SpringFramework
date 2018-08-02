@@ -7,11 +7,11 @@ import java.io.Serializable;
  * Created by zhmv on 30.07.2018.
  */
 @Entity
-@Table(name="genre")
+@Table(name="genre_table")
 public class Genre  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
 
@@ -36,6 +36,14 @@ public class Genre  implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @Override

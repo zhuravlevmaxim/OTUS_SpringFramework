@@ -14,5 +14,4 @@ public interface AuthorRepository {
     public List<Author> getAll();
     public void deleteById(long id);
     public void insert(Author author);
-
 }

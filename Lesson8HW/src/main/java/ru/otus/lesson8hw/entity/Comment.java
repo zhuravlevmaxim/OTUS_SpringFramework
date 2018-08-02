@@ -10,11 +10,11 @@ import java.util.Set;
  * Created by zhmv on 30.07.2018.
  */
 @Entity
-@Table(name="comment")
+@Table(name="comment_table")
 public class Comment  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
 
