@@ -21,7 +21,7 @@ public class GenreRepositoryJdbc implements GenreRepository{
 
     @Override
     public long count() {
-        return entityManager.createNamedQuery("select count(*) from genre", Long.class).getSingleResult();
+        return entityManager.createNamedQuery("select count(*) from genre_table", Long.class).getSingleResult();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class GenreRepositoryJdbc implements GenreRepository{
 
     @Override
     public List<Genre> getAll() {
-        return entityManager.createQuery("select g from genre g", Genre.class).getResultList();
+        return entityManager.createQuery("select g from genre_table g", Genre.class).getResultList();
     }
 
     @Override

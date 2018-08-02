@@ -21,7 +21,7 @@ public class CommentRepositoryJdbc implements  CommentRepository{
 
     @Override
     public long count() {
-        return entityManager.createNamedQuery("select count(*) from comment", Long.class).getSingleResult();
+        return entityManager.createNamedQuery("select count(*) from comment_table", Long.class).getSingleResult();
     }
 
     @Override

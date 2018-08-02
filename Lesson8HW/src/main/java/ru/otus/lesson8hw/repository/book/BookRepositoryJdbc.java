@@ -20,7 +20,7 @@ public class BookRepositoryJdbc implements BookRepository{
 
     @Override
     public long count() {
-        return entityManager.createNamedQuery("select count(*) from book", Long.class).getSingleResult();
+        return entityManager.createNamedQuery("select count(*) from book_table", Long.class).getSingleResult();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BookRepositoryJdbc implements BookRepository{
 
     @Override
     public List<Book> getAll() {
-        return entityManager.createQuery("select b from book b", Book.class).getResultList();
+        return entityManager.createQuery("select b from book_table b", Book.class).getResultList();
     }
 
     @Override
