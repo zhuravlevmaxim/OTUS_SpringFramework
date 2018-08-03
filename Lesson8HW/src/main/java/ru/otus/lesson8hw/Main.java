@@ -13,6 +13,6 @@ import ru.otus.lesson8hw.repository.author.AuthorRepositoryJdbc;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
-        applicationContext.getBean(AuthorRepositoryJdbc.class).insert(new Author("firstName", "secondName"));
+        //applicationContext.getBean(AuthorRepositoryJdbc.class).insert(new Author("firstName", "secondName"));
     }
 }

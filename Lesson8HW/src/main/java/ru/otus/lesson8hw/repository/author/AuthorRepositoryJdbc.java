@@ -20,7 +20,7 @@ public class AuthorRepositoryJdbc implements AuthorRepository {
 
     @Override
     public long count() {
-        return entityManager.createNamedQuery("select count(*) from author_table", Long.class).getSingleResult();
+        return (Long)entityManager.createQuery("select count(a) from Author a").getSingleResult();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AuthorRepositoryJdbc implements AuthorRepository {
 
     @Override
     public List<Author> getAll() {
-        return entityManager.createQuery("select a from author_table a", Author.class).getResultList();
+        return entityManager.createQuery("select a from Author a", Author.class).getResultList();
     }
 
     @Override

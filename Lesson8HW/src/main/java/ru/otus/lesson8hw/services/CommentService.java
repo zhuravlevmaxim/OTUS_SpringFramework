@@ -8,9 +8,9 @@ import java.util.List;
  * Created by zhmv on 01.08.2018.
  */
 public interface CommentService {
-    int count();
-    Comment getById(int id);
-    List<Comment> getAllAuthor();
+    long count();
+    Comment getById(long id);
+    List<Comment> getAllComment();
     void insert(String comment);
-    void deleteById(int id);
+    void deleteById(long id);
 }

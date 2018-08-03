@@ -81,4 +81,9 @@ public class Author  implements Serializable {
     public int hashCode() {
         return this.firstName.hashCode() + this.secondName.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return String.format("|Author: %d, %s, %s|", this.id, this.firstName, this.secondName);
+    }
 }

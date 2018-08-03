@@ -8,9 +8,9 @@ import java.util.List;
  * Created by zhmv on 01.08.2018.
  */
 public interface AuthorService {
-    int count();
-    Author getById(int id);
+    long count();
+    Author getById(long id);
     List<Author> getAllAuthor();
     void insert(String firstName, String secondName);
-    void deleteById(int id);
+    void deleteById(long id);
 }

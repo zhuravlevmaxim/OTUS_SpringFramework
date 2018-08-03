@@ -45,7 +45,7 @@ public class Comment  implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Comment id: %s, comment: %s", this.id, this.comment);
+        return String.format("|Comment id: %d, comment: %s|", this.id, this.comment);
     }
 
     @Override
@@ -64,4 +64,6 @@ public class Comment  implements Serializable {
     public int hashCode() {
         return this.comment.hashCode();
     }
+
+
 }
