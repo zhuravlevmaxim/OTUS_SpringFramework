@@ -28,8 +28,9 @@ public class BookShell {
         bookService.deleteById(id);
     }
     @ShellMethod("Book insert")
-    public void bookInsert(@ShellOption long id, @ShellOption String firstName, @ShellOption String secondName){
-        //bookService.insert(firstName, secondName);
+    public void bookInsert(@ShellOption String name, @ShellOption String description, @ShellOption String firstName,
+                           @ShellOption String secondName, @ShellOption String genreName, @ShellOption String comment){
+        bookService.insert(name, description, firstName, secondName, genreName, comment);
     }
     @ShellMethod("Book list")
     public String bookList(){

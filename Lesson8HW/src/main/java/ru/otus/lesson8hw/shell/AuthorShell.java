@@ -28,7 +28,7 @@ public class AuthorShell {
         authorService.deleteById(id);
     }
     @ShellMethod("Author insert")
-    public void authorInsert(@ShellOption long id, @ShellOption String firstName, @ShellOption String secondName){
+    public void authorInsert(@ShellOption String firstName, @ShellOption String secondName){
         authorService.insert(firstName, secondName);
     }
     @ShellMethod("Author list")

@@ -28,8 +28,8 @@ public class CommentShell {
         commentService.deleteById(id);
     }
     @ShellMethod("Comment insert")
-    public void commentInsert(@ShellOption long id, @ShellOption String firstName, @ShellOption String secondName){
-        //commentService.insert(firstName, secondName);
+    public void commentInsert(@ShellOption long idBook, @ShellOption String comment){
+        commentService.insert(idBook, comment);
     }
     @ShellMethod("Comment list")
     public String commentList(){

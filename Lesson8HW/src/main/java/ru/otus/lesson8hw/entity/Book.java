@@ -23,16 +23,28 @@ public class Book implements Serializable {
     @Column(name="description")
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Author author;
 
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Genre> genres = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "book_comments_detail", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private Set<Comment> comments = new HashSet<>();
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAuthor(Author author){
+        this.author = author;
+    }
 
     public void setComment(Comment comment){
         this.comments.add(comment);
@@ -48,10 +60,7 @@ public class Book implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return Objects.equals(name, book.name) &&
-                Objects.equals(description, book.description) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(genres, book.genres) &&
-                Objects.equals(comments, book.comments);
+                Objects.equals(description, book.description);
     }
 
     @Override

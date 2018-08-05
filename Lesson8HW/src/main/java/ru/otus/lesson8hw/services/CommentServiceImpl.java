@@ -2,7 +2,9 @@ package ru.otus.lesson8hw.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.otus.lesson8hw.entity.Book;
 import ru.otus.lesson8hw.entity.Comment;
+import ru.otus.lesson8hw.repository.book.BookRepositoryJdbc;
 import ru.otus.lesson8hw.repository.comment.CommentRepositoryJdbc;
 
 import java.util.List;
@@ -11,6 +13,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentRepositoryJdbc commentRepositoryJdbc;
+    @Autowired
+    private BookRepositoryJdbc bookRepositoryJdbc;
 
     @Override
     public long count() {
@@ -28,8 +32,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void insert(String comment) {
-        //commentRepositoryJdbc.insert();
+    public void insert(long idBook, String commentS) {
+        Book book = bookRepositoryJdbc.getById(idBook);
+        Comment comment = new Comment();
+        comment.setComment(commentS);
+        comment.setBook(book);
+        book.setComment(comment);
+        commentRepositoryJdbc.insert(comment);
     }
 
     @Override

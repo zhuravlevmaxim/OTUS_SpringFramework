@@ -43,6 +43,10 @@ public class Comment  implements Serializable {
         this.comment = comment;
     }
 
+    public void setBook(Book book){
+        books.add(book);
+    }
+
     @Override
     public String toString() {
         return String.format("|Comment id: %d, comment: %s|", this.id, this.comment);
@@ -64,6 +68,5 @@ public class Comment  implements Serializable {
     public int hashCode() {
         return this.comment.hashCode();
     }
-
 
 }

@@ -12,6 +12,6 @@ public interface GenreService {
     long count();
     Genre getById(long id);
     List<Genre> getAllGenre();
-    void insert(String genreName);
+    void insert(long idBook, String genreName);
     void deleteById(long id);
 }

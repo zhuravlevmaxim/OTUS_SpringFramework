@@ -11,6 +11,6 @@ public interface CommentService {
     long count();
     Comment getById(long id);
     List<Comment> getAllComment();
-    void insert(String comment);
+    void insert(long idBook, String comment);
     void deleteById(long id);
 }

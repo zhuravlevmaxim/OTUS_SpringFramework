@@ -2,7 +2,9 @@ package ru.otus.lesson8hw.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.otus.lesson8hw.entity.Book;
 import ru.otus.lesson8hw.entity.Genre;
+import ru.otus.lesson8hw.repository.book.BookRepositoryJdbc;
 import ru.otus.lesson8hw.repository.genre.GenreRepositoryJdbc;
 
 import java.util.List;
@@ -11,6 +13,8 @@ public class GenreServiceImpl implements GenreService{
 
     @Autowired
     private GenreRepositoryJdbc genreRepositoryJdbc;
+    @Autowired
+    private BookRepositoryJdbc bookRepositoryJdbc;
 
     @Override
     public long count() {
@@ -28,8 +32,13 @@ public class GenreServiceImpl implements GenreService{
     }
 
     @Override
-    public void insert(String genreName) {
-        //genreRepositoryJdbc.insert();
+    public void insert(long idBook, String genreName) {
+        Book book = bookRepositoryJdbc.getById(idBook);
+        Genre genre = new Genre();
+        genre.setGenre(genreName);
+        genre.setBook(book);
+        book.setGenre(genre);
+        genreRepositoryJdbc.insert(genre);
     }
 
     @Override

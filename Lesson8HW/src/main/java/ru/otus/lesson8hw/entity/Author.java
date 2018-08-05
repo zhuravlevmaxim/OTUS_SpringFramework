@@ -2,7 +2,6 @@ package ru.otus.lesson8hw.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Created by zhmv on 30.07.2018.
@@ -10,14 +9,6 @@ import java.util.Objects;
 @Entity
 @Table(name="author_table")
 public class Author  implements Serializable {
-
-    public Author(){}
-
-    public Author(String firstName, String secondName){
-        this.firstName = firstName;
-        this.secondName = secondName;
-    }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +18,10 @@ public class Author  implements Serializable {
     @Column(name="first_name")
     private String firstName;
 
-    @Column(name="secomd_name")
+    @Column(name="second_name")
     private String secondName;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     private Book book;
 
     public long getId() {

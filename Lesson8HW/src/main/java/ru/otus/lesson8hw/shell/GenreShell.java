@@ -28,8 +28,8 @@ public class GenreShell {
         genreService.deleteById(id);
     }
     @ShellMethod("Genre insert")
-    public void genreInsert(@ShellOption long id, @ShellOption String firstName, @ShellOption String secondName){
-        //genreService.insert(firstName, secondName);
+    public void genreInsert(@ShellOption long idBook, @ShellOption String genre){
+        genreService.insert(idBook, genre);
     }
     @ShellMethod("Genre list")
     public String genreList(){

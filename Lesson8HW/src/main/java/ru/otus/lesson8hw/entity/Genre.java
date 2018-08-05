@@ -65,6 +65,6 @@ public class Genre  implements Serializable {
 
     @Override
     public int hashCode() {
-        return genre.hashCode();
+        return this.genre.hashCode();
     }
 }
