@@ -1,23 +1,19 @@
 INSERT INTO
-    author_table (id, first_name, second_name, book_id)
-VALUES
-    (1, 'firstName', 'secondName', 1);
+    author_table (first_name, second_name, book_id)
+VALUES('firstName', 'secondName', 1);
 
 INSERT INTO
     book_comments_detail(comment_id, book_id)
-VALUES
-    (1, 1);
+VALUES(1, 1);
 
 INSERT INTO
-    book_table(id, name, description, author_id)
-VALUES
-    (1, 'book1', 'description1', 1);
+    book_table(name, description, author_id)
+VALUES('book1', 'description1', 1);
 
 INSERT INTO
-    comment_table(id, comment)
-VALUES(1, 'comment1');
+    comment_table(comment)
+VALUES('comment1');
 
 INSERT INTO
-    genre_table(id, genre, book_id)
-VALUES
-    (1, 'genre1', 1);
+    genre_table(genre, book_id)
+VALUES('genre1', 1);

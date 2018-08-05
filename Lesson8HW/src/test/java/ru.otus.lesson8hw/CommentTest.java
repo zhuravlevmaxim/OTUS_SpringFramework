@@ -48,12 +48,11 @@ public class CommentTest {
         Assert.assertEquals(commentRepositoryJdbc.count(), 0);
     }
 
-    @Ignore
     @Test
     public void testInsert(){
         Comment commentTest = new Comment();
         commentTest.setComment("comment2");
         commentRepositoryJdbc.insert(commentTest);
-        Assert.assertEquals(commentRepositoryJdbc.count(), 1);
+        Assert.assertEquals(commentRepositoryJdbc.count(), 2);
     }
 }

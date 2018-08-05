@@ -48,13 +48,12 @@ public class BookTest {
         Assert.assertEquals(bookRepositoryJdbc.count(), 0);
     }
 
-    @Ignore
     @Test
     public void testInsert(){
         Book bookTest = new Book();
-        bookTest.setName("book1");
-        bookTest.setDescription("description1");
+        bookTest.setName("book2");
+        bookTest.setDescription("description2");
         bookRepositoryJdbc.insert(bookTest);
-        Assert.assertEquals(bookRepositoryJdbc.count(), 1);
+        Assert.assertEquals(bookRepositoryJdbc.count(), 2);
     }
 }

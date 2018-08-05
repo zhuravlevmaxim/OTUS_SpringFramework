@@ -48,12 +48,11 @@ public class GenreTest {
         Assert.assertEquals(genreRepositoryJdbc.count(), 0);
     }
 
-    @Ignore
     @Test
     public void testInsert(){
         Genre genreTest = new Genre();
         genreTest.setGenre("genre2");
         genreRepositoryJdbc.insert(genreTest);
-        Assert.assertEquals(genreRepositoryJdbc.count(), 1);
+        Assert.assertEquals(genreRepositoryJdbc.count(), 2);
     }
 }

@@ -8,4 +8,4 @@ spring:
         properties:
                 hibernate:
                         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        hibernate.ddl-auto: none
+        hibernate.ddl-auto: update

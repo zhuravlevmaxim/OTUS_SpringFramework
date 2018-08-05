@@ -8,14 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.shell.jline.InteractiveShellApplicationRunner;
-import org.springframework.shell.jline.ScriptShellApplicationRunner;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.otus.lesson8hw.entity.Author;
-import ru.otus.lesson8hw.entity.Book;
 import ru.otus.lesson8hw.repository.author.AuthorRepositoryJdbc;
 
 /**
@@ -54,13 +49,12 @@ public class AuthorTest {
         Assert.assertEquals(authorRepositoryJdbc.count(), 0);
     }
 
-    @Ignore
     @Test
     public void testInsert(){
         Author authorTest = new Author();
         authorTest.setFirstName("firstName2");
         authorTest.setSecondName("secondName2");
         authorRepositoryJdbc.insert(authorTest);
-        Assert.assertEquals(authorRepositoryJdbc.count(), 1);
+        Assert.assertEquals(authorRepositoryJdbc.count(), 2);
     }
 }
