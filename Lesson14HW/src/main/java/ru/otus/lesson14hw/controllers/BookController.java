@@ -29,4 +29,9 @@ public class BookController {
         model.addAttribute("book", book);
         return "book";
     }
+
+    @RequestMapping("/createOrEdit")
+    public String createOrEditBook(){
+        return  "createOrEdit";
+    }
 }

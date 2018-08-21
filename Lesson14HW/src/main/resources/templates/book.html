@@ -7,11 +7,40 @@
 <body>
 <h1>BOOK:</h1>
 <div>
-    <p th:text="${book.id}">Test id book</p>
-    <p th:text="${book.name}">Test name book</p>
-    <p th:text="${book.description}">Test description book</p>
-    <p th:text="${book.content}">Test content book</p>
-    <p th:text="${book.genre}">Test genre book</p>
+    <form action="/createOrEdit">
+        <input type="submit" value="Edit book" />
+    </form>
+    <table>
+        <tr>
+            <th>Book id</th><th>Book name</th><th>Book description</th><th>Book content</th><th>Book genre</th>
+        </tr>
+        <tr>
+            <td th:text="${book.id}">Test id book</td>
+            <td th:text="${book.name}">Test name book</td>
+            <td th:text="${book.description}">Test description book</td>
+            <td th:text="${book.content}">Test content book</td>
+            <td th:text="(${book.genre != null ? book.genre.genre : 'Genre is empty'})">Test genre book</td>
+        </tr>
+    </table>
+    <h2>List of author</h2>
+    <table align="centre" width="40%">
+        <tr>
+            <th>Author first name</th><th>Author second name</th>
+        </tr>
+        <tr th:each="author : ${book.authors}">
+            <td th:text="${author.firstName}">Test author first name</td>
+            <td th:text="${author.secondName}">Test author second name</td>
+        </tr>
+    </table>
+    <h2>List of comment</h2>
+    <table align="centre" width="40%">
+        <tr>
+            <th>Comment</th>
+        </tr>
+        <tr th:each="comment : ${book.comments}">
+            <td th:text="${comment.comment}">Test comment</td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
