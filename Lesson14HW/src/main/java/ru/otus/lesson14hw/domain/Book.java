@@ -1,6 +1,7 @@
 package ru.otus.lesson14hw.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ public class Book {
     private String description;
     private String content;
     private Genre genre;
+    @DBRef
     private Collection<Author> authors = new ArrayList<>();
+    @DBRef
     private Collection<Comment> comments = new ArrayList<>();
 
     public String getId() {
