@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.otus.lesson14hw.domain.Author;
 import ru.otus.lesson14hw.domain.Book;
+import ru.otus.lesson14hw.domain.Comment;
+import ru.otus.lesson14hw.repository.AuthorRepository;
 import ru.otus.lesson14hw.repository.BookRepository;
+import ru.otus.lesson14hw.repository.CommentRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -17,6 +22,10 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @RequestMapping("/books")
     public String books(Model model){
@@ -33,7 +42,11 @@ public class BookController {
     }
 
     @RequestMapping(value = "/editBook", method = RequestMethod.POST)
-    public String saveNewBook(@ModelAttribute(value = "book") Book book){
+    public String editBook(@ModelAttribute(value = "book") Book book){
+        Collection<Author> authors = book.getAuthors();
+        Collection<Comment> comments = book.getComments();
+        authorRepository.saveAll(authors);
+        commentRepository.saveAll(comments);
         bookRepository.save(book);
         String id = book.getId();
         return "redirect:/book?id=" + id;
@@ -42,6 +55,6 @@ public class BookController {
     @RequestMapping("/deleteBook")
     public String deleteBook(@RequestParam String id){
         bookRepository.deleteById(id);
-        return "/books";
+        return "redirect:/books";
     }
 }
