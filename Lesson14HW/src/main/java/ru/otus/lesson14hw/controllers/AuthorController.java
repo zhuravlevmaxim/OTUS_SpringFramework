@@ -23,7 +23,7 @@ public class AuthorController {
         return "author";
     }
 
-    @RequestMapping("/deleteAuthor")
+    @RequestMapping(value = "/deleteAuthor", method = RequestMethod.POST)
     public String deleteAuthor(@RequestParam String id){
         authorRepository.deleteById(id);
         return "redirect:books";

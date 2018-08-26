@@ -29,4 +29,10 @@ public class GenreController {
         String id = genre.getId();
         return "redirect:/genre?id=" + id;
     }
+
+    @RequestMapping(value = "deleteGenre", method = RequestMethod.POST)
+    public String deleteGenre(@RequestParam String id){
+        genreRepository.deleteById(id);
+        return "redirect:/books";
+    }
 }

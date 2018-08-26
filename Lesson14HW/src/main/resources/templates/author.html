@@ -6,11 +6,11 @@
 </head>
 <body>
     <h1>Author:</h1>
-    <form action="/deleteAuthor" th:action="@{/deleteAuthor(id=${author.id})}">
+    <form action="/#" th:action="@{/deleteAuthor(id=${author.id})}" method="post">
         <input type="submit" value="Delete author" />
     </form>
-    <form action="#" th:action="@{/editAuthor}" th:object="${author}" method="post">
-        <p>Author id: <input type="text" th:field="*{id}"/></p>
+    <form action="#" name="author" th:action="@{/editAuthor}" th:object="${author}" method="post">
+        <p>Author id: <input type="text" th:field="*{id}" disabled/></p>
         <p>Author first name: <input type="text" th:field="*{firstName}" /></p>
         <p>Author second name: <input type="text" th:field="*{secondName}" /></p>
         <datalist>

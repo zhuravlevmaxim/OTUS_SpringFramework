@@ -14,7 +14,7 @@ public class Genre {
     @Indexed
     private String id;
 
-    @Indexed(unique = true)
+    @Indexed
     private String genre;
 
     public String getId() {

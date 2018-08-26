@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.lesson14hw.domain.Author;
 import ru.otus.lesson14hw.domain.Book;
 import ru.otus.lesson14hw.domain.Comment;
+import ru.otus.lesson14hw.domain.Genre;
 import ru.otus.lesson14hw.repository.AuthorRepository;
 import ru.otus.lesson14hw.repository.BookRepository;
 import ru.otus.lesson14hw.repository.CommentRepository;
+import ru.otus.lesson14hw.repository.GenreRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +26,8 @@ public class BookController {
     private BookRepository bookRepository;
     @Autowired
     private AuthorRepository authorRepository;
+    @Autowired
+    private GenreRepository genreRepository;
     @Autowired
     private CommentRepository commentRepository;
 
@@ -41,6 +45,17 @@ public class BookController {
         return "book";
     }
 
+    @RequestMapping(value = "/createBook", method = RequestMethod.GET)
+    public String createBook(Model model){
+        Book book = new Book();
+        List<Genre> genres = genreRepository.findAll();
+        List<Author> authors = authorRepository.findAll();
+        model.addAttribute("book", book);
+        model.addAttribute("genres", genres);
+        model.addAttribute("authors", authors);
+        return "createBook";
+    }
+
     @RequestMapping(value = "/editBook", method = RequestMethod.POST)
     public String editBook(@ModelAttribute(value = "book") Book book){
         Collection<Author> authors = book.getAuthors();
@@ -52,9 +67,21 @@ public class BookController {
         return "redirect:/book?id=" + id;
     }
 
+    @RequestMapping(value = "/saveBook", method = RequestMethod.POST)
+    public String saveBook(@ModelAttribute Book book){
+        book = bookRepository.save(book);
+        return "redirect:/book?id=" + book.getId();
+    }
+
     @RequestMapping("/deleteBook")
     public String deleteBook(@RequestParam String id){
         bookRepository.deleteById(id);
+        return "redirect:/books";
+    }
+
+    @RequestMapping(value = "/deleteAuthorFromBook", method = RequestMethod.DELETE)
+    public String deleteAuthorFromBook(@ModelAttribute Author author){
+        String id = author.getId();
         return "redirect:/books";
     }
 }

@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>Genre:</h1>
-<form action="/deleteGenre">
-    <input type="submit" value="Delete genre" />
+<form action="/#" th:action="@{/deleteGenre(id=${genre.id})}" method="post">
+    <input type="submit" value="Delete genre"/>
 </form>
 <form action="#" th:action="@{/editGenre}" th:object="${genre}" method="post">
     <p>Genre id: <input type="text" th:field="*{id}"/></p>
