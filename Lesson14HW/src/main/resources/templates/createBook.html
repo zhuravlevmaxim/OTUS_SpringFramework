@@ -13,22 +13,25 @@
     <form action="#" th:action="@{/saveBook}" th:object="${book}" method="post">
         <p>Book name: <input type="text" th:name="name" th:field="*{name}"/></p>
         <p>Book content: <input type="text" th:name="content" th:field="*{content}"/></p>
-        <p>Book description: <input type="text" th:name="description" th:field="*{description}" /></p><div class="box">
-
-        <label for="genre-input">Genre: </label>
-        <select id="genre-input" th:field="*{genre}">
-            <option th:each="genre : ${genres}"
-                    th:value="${{genre}}"
-                    th:text="${genre.genre}">Test genre</option>
-        </select>
-    </div>
+        <p>Book description: <input type="text" th:name="description" th:field="*{description}" /></p>
+        <p>
+            <label for="genre-input">Genre: </label>
+            <select id="genre-input" th:field="*{genre}">
+                <option th:each="genre : ${genres}"
+                        th:value="${{genre}}"
+                        th:text="${genre.genre}">Test genre</option>
+            </select>
+        </p>
+    </p>
     <div>
+        <p>
         <label for="authors-input">Authors: </label>
         <select multiple id="authors-input" th:field="*{authors}">
             <option th:each="author : ${authors}"
                     th:value="${{author}}"
-                    th:text="${author.firstName}">Test authors</option>
+                    th:text="${author.id} +': '+${author.firstName} +' '+ ${author.secondName}">Test authors</option>
         </select>
+        </p>
     </div>
         <p><input type="submit" value="Save"/></p>
     </form>

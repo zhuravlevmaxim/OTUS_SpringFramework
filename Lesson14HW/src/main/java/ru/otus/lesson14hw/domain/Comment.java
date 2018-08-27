@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 /**
  * Created by zhmv on 17.08.2018.
  */
@@ -30,6 +32,22 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment1 = (Comment) o;
+        return Objects.equals(id, comment1.id) &&
+                Objects.equals(comment, comment1.comment);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, comment);
     }
 
     @Override
