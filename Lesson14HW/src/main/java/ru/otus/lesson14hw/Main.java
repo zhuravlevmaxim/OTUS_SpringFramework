@@ -28,7 +28,7 @@ public class Main {
         Author author = null;
         Genre genre = null;
         Comment comment = null;
-        for(int bookCount = 0; bookCount < 100; bookCount++){
+        for(int bookCount = 0; bookCount < 10; bookCount++){
             int valuesLimit = new Random().nextInt(15) + 3;
             book = new Book();
             book.setContent("content: " +bookCount);

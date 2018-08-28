@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 /**
  * Created by zhmv on 12.08.2018.
  */
@@ -16,6 +18,13 @@ public class Author {
 
     private String firstName;
     private String secondName;
+
+    public Author(){}
+
+    public Author(String firstName, String secondName){
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
 
     public String getId() {
         return id;
@@ -39,6 +48,22 @@ public class Author {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return Objects.equals(id, author.id) &&
+                Objects.equals(firstName, author.firstName) &&
+                Objects.equals(secondName, author.secondName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, firstName, secondName);
     }
 
     @Override

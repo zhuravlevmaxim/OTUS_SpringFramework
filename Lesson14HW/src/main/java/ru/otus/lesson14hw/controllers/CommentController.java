@@ -12,6 +12,7 @@ import ru.otus.lesson14hw.domain.Comment;
 import ru.otus.lesson14hw.repository.BookRepository;
 import ru.otus.lesson14hw.repository.CommentRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -39,7 +40,10 @@ public class CommentController {
 
     @RequestMapping("/commentsBook")
     public String commentsBook(@RequestParam String id, Model model){
-        List<Comment> comments = (List<Comment>) bookRepository.findById(id).get().getComments();
+        List<Comment> comments = Collections.emptyList();
+        if(!bookRepository.findById(id).get().getComments().isEmpty()){
+            comments = (List<Comment>)bookRepository.findById(id).get().getComments();
+        }
         Comment comment = new Comment();
         model.addAttribute("idBook", id);
         model.addAttribute("comments", comments);

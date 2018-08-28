@@ -41,7 +41,9 @@ public class BookController {
     @RequestMapping("/book")
     public String book(@RequestParam String id, Model model){
         Book book = bookRepository.findById(id).get();
+        List<Genre> genres = genreRepository.findAll();
         model.addAttribute("book", book);
+        model.addAttribute("genres", genres);
         return "book";
     }
 
