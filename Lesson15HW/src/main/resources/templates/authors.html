@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+    <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
+    <script src="js/author/addAuthor.js"></script>
+    <script src="js/author/deleteAuthor.js"></script>
+</head>
+<body>
+    <h2>Authors</h2>
+    <p><a href="/books">Go to list of book</a></p>
+    <div>
+        <form id="addAuthor">
+            <p>Author firstName: <input type="text" id="firstName" /></p>
+            <p>Author secondName: <input type="text" id="secondName" /></p>
+            <p><input type="submit" value="Add author"/></p>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>Author id</th><th>Author firstName</th><th>Author secondName</th>
+        </tr>
+        <tr th:each="authorV : ${authors}">
+            <form id="deleteAuthor" th:object="${authorV}">
+                <td><a href="#" th:text="${authorV.id}" th:href="@{/author(id=${authorV.id})}" id="idDelete">Test edit author</a></td>
+                <td><input type="text" id="firstNameDelete" th:value="*{firstName}"/></td>
+                <td><input type="text" id="secondNameDelete" th:value="*{secondName}"/></td>
+                <td><input type="submit" value="Delete author"/></td>
+            </form>
+        </tr>
+    </table>
+</body>
+</html>
