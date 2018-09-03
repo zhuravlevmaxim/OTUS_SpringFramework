@@ -29,7 +29,7 @@ public class BookWebController {
     public String books(Model model){
         List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
-        return "/books";
+        return "books";
     }
 
     @RequestMapping(value = "/book", method = RequestMethod.GET)
@@ -41,7 +41,7 @@ public class BookWebController {
         model.addAttribute("book", book);
         model.addAttribute("genres", genres);
         model.addAttribute("authors", authors);
-        return "/book";
+        return "book";
     }
     @RequestMapping(value = "/deleteBook", method = RequestMethod.POST)
     public String deleteBook(@RequestParam String id){

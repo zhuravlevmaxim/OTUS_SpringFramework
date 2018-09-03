@@ -16,7 +16,7 @@ public class AuthorWebController {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @RequestMapping(value = "authors", method = RequestMethod.GET)
+    @RequestMapping(value = "/authors", method = RequestMethod.GET)
     public String authors(Model model){
         List<Author> authors = authorRepository.findAll();
         model.addAttribute("authors", authors);

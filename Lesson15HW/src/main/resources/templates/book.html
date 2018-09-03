@@ -84,7 +84,7 @@
                     <th>Comment id</th><th>Comment</th>
                 </tr>
                 <tr th:each="comment : ${book.comments}">
-                    <form th:object="${comment}" id="deleteCommentFromBook">
+                    <form id="deleteCommentFromBook" th:object="${comment}">
                         <td><input type="text" th:value="*{id}" id="commentId" disabled/></td>
                         <td><input type="text" th:value="*{comment}" id="comment" disabled/></td>
                         <td><input type="submit" value="Delete comment"/></td>

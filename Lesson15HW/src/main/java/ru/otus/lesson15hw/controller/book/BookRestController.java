@@ -18,7 +18,7 @@ import ru.otus.lesson15hw.repository.BookRepository;
 import ru.otus.lesson15hw.repository.CommentRepository;
 import ru.otus.lesson15hw.repository.GenreRepository;
 
-@RestController
+//@RestController
 public class BookRestController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class BookRestController {
     private static final String GENRE = "genre";
     private static final String AUTHORS = "authors";
 
-    @PostMapping("editBook")
+    @PostMapping("/editBook")
     public Book updateBookValue(@RequestBody Book book){
         Query query = new Query();
         query.addCriteria(Criteria.where(ID).is(book.getId()));
@@ -52,7 +52,7 @@ public class BookRestController {
         return bookUpdate;
     }
 
-    @PostMapping("editGenreBook")
+    @PostMapping("/editGenreBook")
     public Book editGenreBook(@RequestParam String id, @RequestBody String genreId){
         Query query = new Query();
         query.addCriteria(Criteria.where(ID).is(id));
@@ -64,7 +64,7 @@ public class BookRestController {
         return bookUpdate;
     }
 
-    @PostMapping("deleteAuthorFromBook")
+    @PostMapping("/deleteAuthorFromBook")
     public String deleteAuthorFromBook(@RequestParam String id, @RequestBody Author author){
         Book book = bookRepository.findById(id).get();
         book.getAuthors().remove(author);
@@ -72,7 +72,7 @@ public class BookRestController {
         return "book?id="+id;
     }
 
-    @PostMapping("addAuthorInBook")
+    @PostMapping("/addAuthorInBook")
     public String addAuthorInBook(@RequestParam String id, @RequestBody String authorId){
         Book book = bookRepository.findById(id).get();
         Author author = authorRepository.findById(authorId).get();
@@ -81,7 +81,7 @@ public class BookRestController {
         return "book?id="+id;
     }
 
-    @PostMapping("deleteCommentFromBook")
+    @PostMapping("/deleteCommentFromBook")
     public String deleteCommentFromBook(@RequestParam String id, @RequestBody Comment comment){
         Book book = bookRepository.findById(id).get();
         book.getComments().remove(comment);
@@ -89,7 +89,7 @@ public class BookRestController {
         return "book?id="+id;
     }
 
-    @PostMapping("addCommentInBook")
+    @PostMapping("/addCommentInBook")
     public String addCommentInBook(@RequestParam String id, @RequestBody Comment comment){
         Book book = bookRepository.findById(id).get();
         comment = commentRepository.save(comment);

@@ -10,11 +10,13 @@ $(document).ready(function() {
         }
         $.ajax({
             type : "POST",
-            contentType : "application/text",
+            contentType : "application/json",
             url : "addAuthor",
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
+                $("#firstName").innerHTML = "";
+                $("#secondName").innerHTML = "";
                 window.location.href = result;
                 console.log("success add author in book!");
             },

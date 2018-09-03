@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Authors</title>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/author/addAuthor.js"></script>
     <script src="js/author/deleteAuthor.js"></script>
 </head>
@@ -19,11 +20,12 @@
     </div>
     <table>
         <tr>
-            <th>Author id</th><th>Author firstName</th><th>Author secondName</th>
+            <th>Edit author</th><th>Author id</th><th>Author firstName</th><th>Author secondName</th>
         </tr>
-        <tr th:each="authorV : ${authors}">
-            <form id="deleteAuthor" th:object="${authorV}">
-                <td><a href="#" th:text="${authorV.id}" th:href="@{/author(id=${authorV.id})}" id="idDelete">Test edit author</a></td>
+        <tr th:each="author : ${authors}">
+            <form id="deleteAuthor" th:object="${author}">
+                <td><a href="#" th:href="@{/author(id=${author.id})}">Edit author</a></td>
+                <td><input type="text" id="idDelete" th:value="*{id}"/></td>
                 <td><input type="text" id="firstNameDelete" th:value="*{firstName}"/></td>
                 <td><input type="text" id="secondNameDelete" th:value="*{secondName}"/></td>
                 <td><input type="submit" value="Delete author"/></td>
