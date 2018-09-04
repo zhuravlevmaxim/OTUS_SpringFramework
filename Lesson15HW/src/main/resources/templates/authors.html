@@ -5,8 +5,14 @@
     <title>Authors</title>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var authors = /*[[${authors}]]*/ 'default';
+        /*]]>*/
+    </script>
     <script src="js/author/addAuthor.js"></script>
     <script src="js/author/deleteAuthor.js"></script>
+    <script src="js/author/createTable.js"></script>
 </head>
 <body>
     <h2>Authors</h2>
@@ -18,19 +24,10 @@
             <p><input type="submit" value="Add author"/></p>
         </form>
     </div>
-    <table>
-        <tr>
-            <th>Edit author</th><th>Author id</th><th>Author firstName</th><th>Author secondName</th>
-        </tr>
-        <tr th:each="author : ${authors}">
-            <form id="deleteAuthor" th:object="${author}">
-                <td><a href="#" th:href="@{/author(id=${author.id})}">Edit author</a></td>
-                <td><input type="text" id="idDelete" th:value="*{id}"/></td>
-                <td><input type="text" id="firstNameDelete" th:value="*{firstName}"/></td>
-                <td><input type="text" id="secondNameDelete" th:value="*{secondName}"/></td>
-                <td><input type="submit" value="Delete author"/></td>
-            </form>
-        </tr>
-    </table>
+    <div id="authorsTableDiv">
+        <script>
+            createTable();
+        </script>
+    </div>
 </body>
 </html>

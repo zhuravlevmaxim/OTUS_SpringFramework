@@ -1,26 +1,19 @@
-$(document).ready(function() {
-    $("#deleteAuthor").submit(function(event) {
-        event.preventDefault();
-        deleteAuthor();
-    });
-    function deleteAuthor(){
+ function deleteAuthor(idDeleteAuthor){
         var formData = {
-            id: $("#idDelete").val(),
-            firstName :  $("#firstNameDelete").val(),
-            secondName :  $("#secondNameDelete").val()
+            id: idDeleteAuthor
         }
         $.ajax({
             type : "DELETE",
             contentType : "application/json",
-            url : "deleteAuthor",
+            url : "deleteAuthor/" + idDeleteAuthor,
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
                 console.log(result);
+                createTable(result);
             },
             error : function(e) {
                 console.log("ERROR: ", e);
             }
         });
-    }
-})
+}

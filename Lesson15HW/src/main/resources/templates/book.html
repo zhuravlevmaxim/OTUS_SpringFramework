@@ -27,10 +27,10 @@
     </div>
     <div class="bookdiv">
         <form th:object="${book}" id="editBookForm">
-            <p>Book id: <input type="text" th:field="*{id}" th:name="id" disabled/></p>
-            <p>Book name: <input type="text" th:field="*{name}" th:name="name"/></p>
-            <p>Book content: <input type="text" th:field="*{content}" th:name="content"/></p>
-            <p>Book description: <input type="text" th:field="*{description}" th:name="description"/></p>
+            <p>Book id: <input type="text" th:field="*{id}" id="id" disabled/></p>
+            <p>Book name: <input type="text" th:field="*{name}" id="name"/></p>
+            <p>Book content: <input type="text" th:field="*{content}" id="content"/></p>
+            <p>Book description: <input type="text" th:field="*{description}" id="description"/></p>
             <p><input type="submit" value="Edit book" class="editBook"/></p>
         </form>
         <div id = "div">

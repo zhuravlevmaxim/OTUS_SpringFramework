@@ -18,7 +18,7 @@ import ru.otus.lesson15hw.repository.BookRepository;
 import ru.otus.lesson15hw.repository.CommentRepository;
 import ru.otus.lesson15hw.repository.GenreRepository;
 
-//@RestController
+@RestController
 public class BookRestController {
 
     @Autowired
