@@ -1,16 +1,16 @@
- function deleteAuthor(idDeleteAuthor){
+ function deleteGenre(idDeleteGenre){
         var formData = {
-            id: idDeleteAuthor
+            id: idDeleteGenre
         }
         $.ajax({
             type : "DELETE",
             contentType : "application/json",
-            url : "/deleteAuthor/" + idDeleteAuthor,
+            url : "/deleteGenre/" + idDeleteGenre,
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
-                console.log(result);
-                createTableAuthors(result);
+                createTableGenres(result);
+                console.log("success delete genre!");
             },
             error : function(e) {
                 console.log("ERROR: ", e);

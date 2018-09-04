@@ -17,9 +17,9 @@ public class AuthorRestController {
     private AuthorRepository authorRepository;
 
     @PostMapping("/addAuthor")
-    public String addAuthor(@RequestBody Author author){
+    public List<Author> addAuthor(@RequestBody Author author){
         authorRepository.save(author);
-        return "authors";
+        return authorRepository.findAll();
     }
 
     @DeleteMapping("/deleteAuthor/{authorId}")

@@ -1,4 +1,4 @@
-function createTable(authorsData){
+function createTableAuthors(authorsData){
     if(authorsData){
         var authorsT = authorsData;
         var authorsTable = document. getElementById("authorsTable");

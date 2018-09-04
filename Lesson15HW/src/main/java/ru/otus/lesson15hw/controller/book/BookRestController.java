@@ -5,10 +5,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.otus.lesson15hw.domain.Author;
 import ru.otus.lesson15hw.domain.Book;
 import ru.otus.lesson15hw.domain.Comment;
@@ -17,6 +14,8 @@ import ru.otus.lesson15hw.repository.AuthorRepository;
 import ru.otus.lesson15hw.repository.BookRepository;
 import ru.otus.lesson15hw.repository.CommentRepository;
 import ru.otus.lesson15hw.repository.GenreRepository;
+
+import java.util.List;
 
 @RestController
 public class BookRestController {
@@ -64,12 +63,12 @@ public class BookRestController {
         return bookUpdate;
     }
 
-    @PostMapping("/deleteAuthorFromBook")
-    public String deleteAuthorFromBook(@RequestParam String id, @RequestBody Author author){
+    @DeleteMapping("/deleteAuthorFromBook/{id}")
+    public List<Author> deleteAuthorFromBook(@PathVariable String id, @RequestBody Author author){
         Book book = bookRepository.findById(id).get();
         book.getAuthors().remove(author);
         bookRepository.save(book);
-        return "book?id="+id;
+        return (List<Author>)book.getAuthors();
     }
 
     @PostMapping("/addAuthorInBook")
@@ -81,12 +80,12 @@ public class BookRestController {
         return "book?id="+id;
     }
 
-    @PostMapping("/deleteCommentFromBook")
-    public String deleteCommentFromBook(@RequestParam String id, @RequestBody Comment comment){
+    @DeleteMapping("/deleteCommentFromBook/{id}")
+    public List<Comment> deleteCommentFromBook(@PathVariable String id, @RequestBody Comment comment){
         Book book = bookRepository.findById(id).get();
         book.getComments().remove(comment);
         bookRepository.save(book);
-        return "book?id="+id;
+        return (List<Comment>)book.getComments();
     }
 
     @PostMapping("/addCommentInBook")

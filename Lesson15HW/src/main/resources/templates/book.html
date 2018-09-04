@@ -6,12 +6,21 @@
     <link rel="stylesheet" type="text/css" href="css/book/bookstyle.css">
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var authors = /*[[${book.authors}]]*/ 'default';
+        var comments = /*[[${book.comments}]]*/ 'default';
+        var book = /*[[${book}]]*/ 'default';
+        /*]]>*/
+    </script>
     <script src="js/book/editBook.js"></script>
     <script src="js/book/editGenreFromBook.js"></script>
     <script src="js/book/deleteAuthorFromBook.js"></script>
     <script src="js/book/addAuthorInBook.js"></script>
     <script src="js/book/deleteCommentFromBook.js"></script>
     <script src="js/book/addCommentInBook.js"></script>
+    <script src="js/book/createTableAuthorsFromBook.js"></script>
+    <script src="js/book/createTableCommentsFromBook.js"></script>
 </head>
 <body>
     <div>
@@ -48,19 +57,11 @@
         <div>
             <fieldset>
                 <legend>List of author</legend>
-                <table align="centre" width="40%">
-                    <tr>
-                        <th>Author id</th><th>Author first name</th><th>Author second name</th>
-                    </tr>
-                    <tr th:each="author : ${book.authors}">
-                        <form th:object="${author}" id="deleteAuthorFromBook">
-                            <td><input type="text" th:value="*{id}" id="authorId" disabled/></td>
-                            <td><input type="text" th:value="*{firstName}" id="firstName" disabled/></td>
-                            <td><input type="text" th:value="*{secondName}" id="secondName" disabled/></td>
-                            <td><input type="submit" value="Delete author"/></td>
-                        </form>
-                    </tr>
-                </table>
+                <div id="authorsTableDiv">
+                    <script>
+                        createTableAuthorsFromBook();
+                    </script>
+                </div>
                 <div>
                     <p>
                         <form th:object="${author}" id="addAuthorInBook">
@@ -79,7 +80,12 @@
         <div>
             <fieldset>
             <legend>List of comment</legend>
-            <table>
+                <div id="commentsTableDiv">
+                    <script>
+                        createTableCommentsFromBook();
+                    </script>
+                </div>
+            <!--table>
                 <tr>
                     <th>Comment id</th><th>Comment</th>
                 </tr>
@@ -90,7 +96,7 @@
                         <td><input type="submit" value="Delete comment"/></td>
                     </form>
                 </tr>
-            </table>
+            </table-->
              <p>
                  <form id="addCommentInBook">
                     <p>Comment: <input type="text" id="addComment"/></p>

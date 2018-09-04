@@ -1,22 +1,17 @@
-$(document).ready(function() {
-    $("#deleteAuthorFromBook").submit(function (event) {
-        event.preventDefault();
-        deleteAuthorFormBook();
-    });
-    function deleteAuthorFormBook(){
+    function deleteAuthorFromBook(idDeleteAuthor, firstNameAuthor, secondNameAuthor){
         var formData = {
-            id : $("#authorId").val(),
-            firstName :  $("#firstName").val(),
-            secondName :  $("#secondName").val()
+            id: idDeleteAuthor,
+            firstName :  firstNameAuthor,
+            secondName :  secondNameAuthor
         }
         $.ajax({
-            type : "POST",
-            contentType : "application/text",
-            url : "deleteAuthorFromBook?id=" + $("#id").val(),
+            type : "DELETE",
+            contentType : "application/json",
+            url : "/deleteAuthorFromBook/" + window.book.id,
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
-                window.location.href = result;
+                createTableAuthorsFromBook(result);
                 console.log("success remove author from book!");
             },
             error : function(e) {
@@ -24,4 +19,3 @@ $(document).ready(function() {
             }
         });
     }
-})

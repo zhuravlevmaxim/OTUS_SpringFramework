@@ -1,24 +1,21 @@
 $(document).ready(function() {
-    $("#addAuthor").submit(function (event) {
+    $("#addGenre").submit(function (event) {
         event.preventDefault();
-        addAuthor();
+        addGenre();
     });
-    function addAuthor(){
+    function addGenre(){
         var formData = {
-            firstName :  $("#firstName").val(),
-            secondName :  $("#secondName").val()
+            genre :  $("#genre").val()
         }
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : "/addAuthor",
+            url : "/addGenre",
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
-                $("#firstName").innerHTML = "";
-                $("#secondName").innerHTML = "";
-                createTableAuthors(result);
-                console.log("success add author!");
+                createTableGenres(result);
+                console.log("success add genre!");
             },
             error : function(e) {
                 console.log("ERROR: ", e);

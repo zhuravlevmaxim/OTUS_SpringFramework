@@ -1,21 +1,16 @@
-$(document).ready(function() {
-    $("#deleteCommentFromBook").submit(function (event) {
-        event.preventDefault();
-        deleteCommentFromBook();
-    });
-    function deleteCommentFromBook(){
+    function deleteCommentFromBook(idDeleteComment, commentDeleteComment){
         var formData = {
-            id : $("#commentId").val(),
-            comment :  $("#comment").val()
+            id : idDeleteComment,
+            comment :  commentDeleteComment
         }
         $.ajax({
-            type : "POST",
+            type : "DELETE",
             contentType : "application/json",
-            url : "deleteCommentFromBook?id=" + $("#id").val(),
+            url : "/deleteCommentFromBook/" + window.book.id,
             data : JSON.stringify(formData),
             dataType : "json",
             success : function(result) {
-                window.location.href = result;
+                createTableCommentsFromBook(result);
                 console.log("success delete comment from book!");
             },
             error : function(e) {
@@ -23,4 +18,3 @@ $(document).ready(function() {
             }
         });
     }
-})
