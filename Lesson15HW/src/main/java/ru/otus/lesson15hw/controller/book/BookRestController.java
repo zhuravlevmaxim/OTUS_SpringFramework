@@ -36,7 +36,6 @@ public class BookRestController {
     private static final String DESCRIPTION = "description";
     private static final String CONTENT = "content";
     private static final String GENRE = "genre";
-    private static final String AUTHORS = "authors";
 
     @PostMapping("/editBook")
     public Book updateBookValue(@RequestBody Book book){
@@ -69,6 +68,12 @@ public class BookRestController {
         book.getAuthors().remove(author);
         bookRepository.save(book);
         return (List<Author>)book.getAuthors();
+    }
+
+    @PutMapping("/saveBook")
+    public String saveBook(@RequestBody Book book){
+        book = bookRepository.save(book);
+        return book.getId();
     }
 
     @PostMapping("/addAuthorInBook")

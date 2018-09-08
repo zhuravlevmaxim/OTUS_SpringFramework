@@ -17,6 +17,12 @@ public class Genre {
     @Indexed
     private String genre;
 
+    public Genre(){}
+
+    public Genre(String genre){
+        this.genre = genre;
+    }
+
     public String getId() {
         return id;
     }

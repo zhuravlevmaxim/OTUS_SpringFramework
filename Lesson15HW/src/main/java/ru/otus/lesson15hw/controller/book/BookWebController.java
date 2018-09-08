@@ -48,4 +48,13 @@ public class BookWebController {
         bookRepository.deleteById(id);
         return "redirect:/books";
     }
+
+    @RequestMapping(value = "/createBook", method = RequestMethod.GET)
+    public String createBook(Model model){
+        List<Author> authors = authorRepository.findAll();
+        List<Genre> genres = genreRepository.findAll();
+        model.addAttribute("genres", genres);
+        model.addAttribute("authors", authors);
+        return "createBook";
+    }
 }

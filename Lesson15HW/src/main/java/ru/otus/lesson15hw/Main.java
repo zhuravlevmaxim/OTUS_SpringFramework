@@ -22,7 +22,7 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context =
-                SpringApplication.run(Main.class);
+                SpringApplication.run(Main.class, args);
         /*
         BookRepository bookRepository = context.getBean(BookRepository.class);
         AuthorRepository authorRepository = context.getBean(AuthorRepository.class);
@@ -55,30 +55,6 @@ public class Main {
             }
             bookRepository.save(book);
         }
-        //*/
-        /*
-        MongoOperations mongoOperations = context.getBean(MongoOperations.class);
-        String name = "NAME";
-        String description = "DESCRIPTION";
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is("5b8a22e8cbfe901e1816ba64"));
-        Update update = new Update();
-        update.set("name", name);
-        update.set("description", description);
-        mongoOperations.updateFirst(query, update, Book.class);
-        //*/
-        /*
-        MongoOperations mongoOperations = context.getBean(MongoOperations.class);
-        String idGenre = "5b8a22e8cbfe901e1816ba65";
-        String genreGenre = "genre11";
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is("5b8a22e8cbfe901e1816ba64"));
-        Genre genre = new Genre();
-        genre.setId(idGenre);
-        genre.setGenre(genreGenre);
-        Update update = new Update();
-        update.set("genre", genre);
-        mongoOperations.updateFirst(query, update, Book.class);
         //*/
     }
 }

@@ -33,7 +33,11 @@ function createTableAuthors(authorsData){
         var tr = document.createElement("tr");
         var tdId = document.createElement("td");
         tdId.setAttribute("id", "idDelete");
-        tdId.innerHTML = rowData["id"];
+        var linkId = document.createElement("a");
+        linkId.href = "/author?id="+ rowData["id"];
+        var linkIdText = document.createTextNode(rowData["id"]);
+        linkId.appendChild(linkIdText);
+        tdId.appendChild(linkId);
         var tdFirstName = document.createElement("td");
         tdFirstName.innerHTML = rowData["firstName"];
         var tdSecondName = document.createElement("td");

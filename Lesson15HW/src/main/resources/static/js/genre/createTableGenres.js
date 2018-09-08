@@ -30,7 +30,11 @@ function createTableGenres(genresData){
         var tr = document.createElement("tr");
         var tdId = document.createElement("td");
         tdId.setAttribute("id", "idDelete");
-        tdId.innerHTML = rowData["id"];
+        var linkId = document.createElement("a");
+        linkId.href = "/genre?id="+ rowData["id"];
+        var linkIdText = document.createTextNode(rowData["id"]);
+        linkId.appendChild(linkIdText);
+        tdId.appendChild(linkId);
         var tdGenre = document.createElement("td");
         tdGenre.innerHTML = rowData["genre"];
         var tdButtonDelete = document.createElement("td");
