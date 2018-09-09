@@ -1,0 +1,7 @@
+spring:
+      data:
+          mongodb:
+                authentication: none
+                database: otus17
+                port: 27017
+                host: localhost
