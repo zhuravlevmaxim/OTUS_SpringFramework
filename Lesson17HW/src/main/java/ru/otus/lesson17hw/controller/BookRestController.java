@@ -6,9 +6,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.lesson17hw.domain.Author;
 import ru.otus.lesson17hw.domain.Book;
+import ru.otus.lesson17hw.domain.Comment;
 import ru.otus.lesson17hw.domain.Genre;
 import ru.otus.lesson17hw.repository.BookRepository;
+import ru.otus.lesson17hw.repository.CommentRepository;
 
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class BookRestController {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private CommentRepository commentRepository;
     @Autowired
     private MongoOperations mongoOperations;
 
@@ -54,5 +59,44 @@ public class BookRestController {
         book.setGenre(genre);
         book = bookRepository.save(book);
         return book;
+    }
+
+    @PutMapping("/books/{id}/addAuthorInBook")
+    public @ResponseBody Book addAuthorInBook(@PathVariable String id, @RequestBody Author author){
+        Book book = bookRepository.findById(id).get();
+        book.setAuthor(author);
+        book = bookRepository.save(book);
+        return book;
+    }
+
+    @PutMapping("/books/{id}/deleteAuthorFromBook")
+    public @ResponseBody Book deleteAuthorFromBook(@PathVariable String id, @RequestBody Author author){
+        Book book = bookRepository.findById(id).get();
+        book.getAuthors().remove(author);
+        book = bookRepository.save(book);
+        return book;
+    }
+
+    @PutMapping("/books/{id}/addCommentInBook")
+    public @ResponseBody Book addCommentInBook(@PathVariable String id, @RequestBody Comment comment){
+        Book book = bookRepository.findById(id).get();
+        comment = commentRepository.save(comment);
+        book.setComment(comment);
+        book = bookRepository.save(book);
+        return book;
+    }
+
+    @PutMapping("/books/{id}/deleteCommentFromBook")
+    public @ResponseBody Book deleteCommentFromBook(@PathVariable String id, @RequestBody Comment comment){
+        Book book = bookRepository.findById(id).get();
+        book.getComments().remove(comment);
+        book = bookRepository.save(book);
+        return book;
+    }
+
+    @PostMapping("/books/createNewBook")
+    public @ResponseBody List<Book> createNewBook(@RequestBody Book book){
+        bookRepository.save(book);
+        return bookRepository.findAll();
     }
 }

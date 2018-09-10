@@ -7,6 +7,14 @@ function createTableBooks(booksData){
 
     var booksTableDiv = document.getElementById("mainDiv");
 
+    var buttonCreateNewBook = document.createElement("BUTTON");
+    var textButtonCreateNewBook = document.createTextNode("Create new book");
+    buttonCreateNewBook.appendChild(textButtonCreateNewBook);
+    buttonCreateNewBook.onclick = function(){
+        createNewBookForm();
+    };
+    booksTableDiv.appendChild(buttonCreateNewBook);
+
     var table = document.createElement("TABLE");
     table.setAttribute("id", "booksTable");
     var tableBody = document.createElement("TBODY");

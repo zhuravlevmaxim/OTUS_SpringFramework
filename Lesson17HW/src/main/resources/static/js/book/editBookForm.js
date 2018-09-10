@@ -48,7 +48,6 @@ function editBookForm(book){
     editBookForm.appendChild(buttonFormCreateBook);
     editBookFormDiv.appendChild(editBookForm);
 
-    ///*
     var bookGenreIdP = document.createElement("P");
     bookGenreIdP.innerHTML = "Genre id: " + book["genre"]["id"];
     editBookFormDiv.appendChild(bookGenreIdP);
@@ -87,23 +86,145 @@ function editBookForm(book){
     };
     editGenreBookForm.appendChild(buttonFormEditGenreBook);
     editBookFormDiv.appendChild(editGenreBookForm);
-    //*/
-    /*
+
+    var addAuthorBookForm = document.createElement("FORM");
     var bookAuthorsP = document.createElement("P");
     var bookAuthorsLabel = document.createElement("LABEL");
-    bookGenresLabel.innerHTML = "Authors: ";
+    bookAuthorsLabel.innerHTML = "Authors: ";
     bookAuthorsLabel.setAttribute("for", "author-input");
     bookAuthorsP.appendChild(bookAuthorsLabel);
     var bookAuthorsSelect = document.createElement("SELECT");
     bookAuthorsSelect.setAttribute("id", "author-input");
+    //bookAuthorsSelect.value = book.author.id;
+    var authors = JSON.parse(getAuthors());
     authors.forEach(function(author){
         var bookAuthorOption = document.createElement("OPTION");
-        bookAuthorOption.value = author;
-        bookAuthorOption.text = author["firstName"] + " : " +author["secondName"];
+        bookAuthorOption.setAttribute("id", "optionAuthor");
+        bookAuthorOption.value = {
+            id: author.id,
+            firstName : author.firstName,
+            secondName : author.secondName
+        };
+        bookAuthorOption.text = author.firstName + " : " + author.secondName;
         bookAuthorsSelect.appendChild(bookAuthorOption);
     });
     bookAuthorsP.appendChild(bookAuthorsSelect);
-    editBookFormDiv.appendChild(bookAuthorsP);
-    */
+    addAuthorBookForm.appendChild(bookAuthorsP);
+    var buttonFormAddAuthorBook = document.createElement("BUTTON");
+    buttonFormAddAuthorBook.innerHTML = "Add author in book";
+    buttonFormAddAuthorBook.setAttribute("type", "submit");
+    buttonFormAddAuthorBook.onclick = function(){
+        addAuthorInBook(book.id, authors);
+    };
+    addAuthorBookForm.appendChild(buttonFormAddAuthorBook);
+    editBookFormDiv.appendChild(addAuthorBookForm);
+
+    var tableAuthors = document.createElement("TABLE");
+    tableAuthors.setAttribute("id", "authorsTable");
+    var tableBodyAuthors = document.createElement("TBODY");
+    var trHeadAuthors = document.createElement("tr");
+
+    var thIdTableAuthors = document.createElement("th");
+    thIdTableAuthors.innerHTML = "Author id";
+    var thFirstNameTableAuthors = document.createElement("th");
+    thFirstNameTableAuthors.innerHTML = "Author first name";
+    var thSecondNameTableAuthors = document.createElement("th");
+    thSecondNameTableAuthors.innerHTML = "Author second name";
+    var thDeleteAuthor = document.createElement("th");
+    thDeleteAuthor.innerHTML = "Delete author";
+
+    trHeadAuthors.appendChild(thIdTableAuthors);
+    trHeadAuthors.appendChild(thFirstNameTableAuthors);
+    trHeadAuthors.appendChild(thSecondNameTableAuthors);
+    trHeadAuthors.appendChild(thDeleteAuthor);
+    tableBodyAuthors.appendChild(trHeadAuthors);
+
+    book.authors.forEach(function(author) {
+        var trTableAuthors = document.createElement("tr");
+        var tdIdTableAuthors = document.createElement("td");
+        tdIdTableAuthors.setAttribute("id", "idDelete");
+        tdIdTableAuthors.innerHTML = author["id"];
+        var tdFirstNameTableAuthors = document.createElement("td");
+        tdFirstNameTableAuthors.innerHTML = author["firstName"];
+        var tdSecondNameTableAuthors = document.createElement("td");
+        tdSecondNameTableAuthors.innerHTML = author["secondName"];
+        var tdButtonDeleteTableAuthors = document.createElement("td");
+        var buttonDeleteTableAuthors = document.createElement("BUTTON");
+        var textButtonDeleteTableAuthors = document.createTextNode("Delete author from book");
+        buttonDeleteTableAuthors.appendChild(textButtonDeleteTableAuthors);
+        buttonDeleteTableAuthors.onclick = function(){
+            deleteAuthorFromBook(book.id, author);
+        };
+        tdButtonDeleteTableAuthors.appendChild(buttonDeleteTableAuthors);
+        trTableAuthors.appendChild(tdIdTableAuthors);
+        trTableAuthors.appendChild(tdFirstNameTableAuthors);
+        trTableAuthors.appendChild(tdSecondNameTableAuthors);
+        trTableAuthors.appendChild(tdButtonDeleteTableAuthors);
+        tableBodyAuthors.appendChild(trTableAuthors);
+    });
+
+    tableAuthors.appendChild(tableBodyAuthors);
+    editBookFormDiv.appendChild(tableAuthors);
+
+
+    var addCommentCreateForm = document.createElement("FORM");
+    addCommentCreateForm.setAttribute("id", "addCommentForm");
+
+    var commentCommentP = document.createElement("P");
+    commentCommentP.innerHTML = "Comment: ";
+    var commentCommentInput = document.createElement("INPUT");
+    commentCommentInput.setAttribute("id", "addComment");
+    commentCommentP.appendChild(commentCommentInput);
+    editBookFormDiv.appendChild(commentCommentP);
+
+    var buttonFormAddCommentCreate = document.createElement("BUTTON");
+    buttonFormAddCommentCreate.innerHTML = "Add new comment";
+    buttonFormAddCommentCreate.setAttribute("type", "submit");
+    buttonFormAddCommentCreate.onclick = function(){
+        addCommentInBook(book.id)
+    };
+    addCommentCreateForm.appendChild(buttonFormAddCommentCreate);
+    editBookFormDiv.appendChild(addCommentCreateForm);
+
+    var tableComments = document.createElement("TABLE");
+    tableComments.setAttribute("id", "commentsTable");
+    var tableBodyComments = document.createElement("TBODY");
+    var trHeadComments = document.createElement("tr");
+
+    var thIdTableComments = document.createElement("th");
+    thIdTableComments.innerHTML = "Comment id";
+    var thCommentTableComments = document.createElement("th");
+    thFirstNameTableAuthors.innerHTML = "Comment: ";
+    var thDeleteAuthor = document.createElement("th");
+    thDeleteAuthor.innerHTML = "Delete comment";
+
+    trHeadComments.appendChild(thIdTableComments);
+    trHeadComments.appendChild(thCommentTableComments);
+    trHeadComments.appendChild(thDeleteAuthor);
+    tableBodyComments.appendChild(trHeadComments);
+
+    book.comments.forEach(function(comment) {
+        var trTableComments = document.createElement("tr");
+        var tdIdTableComments = document.createElement("td");
+        tdIdTableComments.innerHTML = comment["id"];
+        var tdCommentTableComments = document.createElement("td");
+        tdCommentTableComments.innerHTML = comment["comment"];
+        var tdButtonDeleteTableComments = document.createElement("td");
+        var buttonDeleteTableComments = document.createElement("BUTTON");
+        var textButtonDeleteTableComments = document.createTextNode("Delete comment from book");
+        buttonDeleteTableComments.appendChild(textButtonDeleteTableComments);
+        buttonDeleteTableComments.onclick = function(){
+            deleteCommentFromBook(book.id, comment);
+        };
+        tdButtonDeleteTableComments.appendChild(buttonDeleteTableComments);
+        trTableComments.appendChild(tdIdTableComments);
+        trTableComments.appendChild(tdCommentTableComments);
+        trTableComments.appendChild(tdButtonDeleteTableComments);
+        tableBodyComments.appendChild(trTableComments);
+    });
+
+    tableComments.appendChild(tableBodyComments);
+    editBookFormDiv.appendChild(tableComments);
+
 
 }
