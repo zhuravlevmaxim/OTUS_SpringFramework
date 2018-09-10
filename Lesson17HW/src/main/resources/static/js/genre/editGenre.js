@@ -1,20 +1,18 @@
-function editBook(){
+function editGenre(){
     var formData = {
         id : $("#id").val(),
-        name :  $("#name").val(),
-        description :  $("#description").val(),
-        content :  $("#content").val()
+        genre :  $("#genre").val()
     }
     $.ajax({
         type : "PUT",
         contentType : "application/json",
-        url : "/books",
+        url : "/genres",
         data : JSON.stringify(formData),
         dataType : "json",
         success : function(result) {
-            editBookForm(result);
-            console.log("success edit book: " +result.id);
-            },
+            editGenreForm(result);
+            console.log("success edit genre: " +result.id);
+        },
         error : function(e) {
             console.log("ERROR: ", e);
         }

@@ -36,7 +36,7 @@ function createTableBooks(booksData){
         var linkId = document.createElement("a");
         linkId.href= "#" + book.id;
         linkId.onclick = function(){
-            createEditBook(book);
+            editBookForm(book);
         };
         var linkIdText = document.createTextNode(book["id"]);
         linkId.appendChild(linkIdText);

@@ -6,6 +6,22 @@ function createTableGenres(genresData){
     }
 
     var genresTableDiv = document.getElementById("mainDiv");
+
+    var createGenreForm = document.createElement("FORM");
+    var genreGenreCreateP = document.createElement("P");
+    genreGenreCreateP.innerHTML = "Genre: ";
+    var genreGenreCreateInput = document.createElement("INPUT");
+    genreGenreCreateInput.setAttribute("id", "genreCreate");
+    genreGenreCreateP.appendChild(genreGenreCreateInput);
+    createGenreForm.appendChild(genreGenreCreateP);
+    var buttonFormCreateGenre = document.createElement("BUTTON");
+    buttonFormCreateGenre.innerHTML = "Create new genre";
+    buttonFormCreateGenre.setAttribute("type", "submit");
+    buttonFormCreateGenre.onclick = createNewGenre;
+    createGenreForm.appendChild(buttonFormCreateGenre);
+
+    genresTableDiv.appendChild(createGenreForm);
+
     var table = document.createElement("TABLE");
     table.setAttribute("id", "genresTable");
     var tableBody = document.createElement("TBODY");
@@ -29,7 +45,10 @@ function createTableGenres(genresData){
         var tdId = document.createElement("td");
         tdId.setAttribute("id", "idDelete");
         var linkId = document.createElement("a");
-        linkId.href = "/genre?id="+ genre["id"];
+        linkId.href= "#" + genre.id;
+        linkId.onclick = function(){
+            editGenreForm(genre);
+        };
         var linkIdText = document.createTextNode(genre["id"]);
         linkId.appendChild(linkIdText);
         tdId.appendChild(linkId);

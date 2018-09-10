@@ -1,4 +1,4 @@
-function createEditBook(book){
+function editBookForm(book){
 
     var mainDiv = document. getElementById("mainDiv");
     while (mainDiv.firstChild) {
@@ -44,14 +44,20 @@ function createEditBook(book){
     var buttonFormCreateBook = document.createElement("BUTTON");
     buttonFormCreateBook.innerHTML = "Edit book";
     buttonFormCreateBook.setAttribute("type", "submit");
-    // buttonFormCreateBook.setAttribute("id", "editBookForm");
-    // buttonFormCreateBook.onclick = function(){
-    //     editBook();
-    // };
+    buttonFormCreateBook.onclick = editBook;
     editBookForm.appendChild(buttonFormCreateBook);
-    editBookFormDiv.appendChild(editBookForm)
+    editBookFormDiv.appendChild(editBookForm);
 
-    /*
+    ///*
+    var bookGenreIdP = document.createElement("P");
+    bookGenreIdP.innerHTML = "Genre id: " + book["genre"]["id"];
+    editBookFormDiv.appendChild(bookGenreIdP);
+
+    var bookGenreGenreP = document.createElement("P");
+    bookGenreGenreP.innerHTML = "Genre: " + book["genre"]["genre"];
+    editBookFormDiv.appendChild(bookGenreGenreP);
+
+    var editGenreBookForm = document.createElement("FORM");
     var bookGenresP = document.createElement("P");
     var bookGenresLabel = document.createElement("LABEL");
     bookGenresLabel.innerHTML = "Genres: ";
@@ -59,8 +65,9 @@ function createEditBook(book){
     bookGenresP.appendChild(bookGenresLabel);
     var bookGenresSelect = document.createElement("SELECT");
     bookGenresSelect.setAttribute("id", "genre-input");
+    bookGenresSelect.value = book.genre.id;
+    var genres = JSON.parse(getGenres());
     genres.forEach(function(genre){
-        console.log(genre);
         var bookGenreOption = document.createElement("OPTION");
         bookGenreOption.setAttribute("id", "optionGenre");
         bookGenreOption.value = {
@@ -71,8 +78,17 @@ function createEditBook(book){
         bookGenresSelect.appendChild(bookGenreOption);
     });
     bookGenresP.appendChild(bookGenresSelect);
-    editBookFormDiv.appendChild(bookGenresP);
-
+    editGenreBookForm.appendChild(bookGenresP);
+    var buttonFormEditGenreBook = document.createElement("BUTTON");
+    buttonFormEditGenreBook.innerHTML = "Edit genre in book";
+    buttonFormEditGenreBook.setAttribute("type", "submit");
+    buttonFormEditGenreBook.onclick = function(){
+        editGenreInBook(book.id, genres);
+    };
+    editGenreBookForm.appendChild(buttonFormEditGenreBook);
+    editBookFormDiv.appendChild(editGenreBookForm);
+    //*/
+    /*
     var bookAuthorsP = document.createElement("P");
     var bookAuthorsLabel = document.createElement("LABEL");
     bookGenresLabel.innerHTML = "Authors: ";
