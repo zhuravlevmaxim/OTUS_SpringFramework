@@ -2,7 +2,10 @@ package ru.otus.lesson17hw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import ru.otus.lesson17hw.domain.Author;
 import ru.otus.lesson17hw.domain.Book;
 import ru.otus.lesson17hw.domain.Comment;
