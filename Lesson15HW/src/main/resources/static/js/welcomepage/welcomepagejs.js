@@ -1,1 +1,0 @@
-alert('Hello friend! You visit site which have many books!');
