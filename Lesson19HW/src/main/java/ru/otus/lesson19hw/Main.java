@@ -3,14 +3,8 @@ package ru.otus.lesson19hw;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.otus.lesson19hw.domain.Author;
-import ru.otus.lesson19hw.domain.Book;
-import ru.otus.lesson19hw.domain.Comment;
-import ru.otus.lesson19hw.domain.Genre;
-import ru.otus.lesson19hw.repository.AuthorRepository;
-import ru.otus.lesson19hw.repository.BookRepository;
-import ru.otus.lesson19hw.repository.CommentRepository;
-import ru.otus.lesson19hw.repository.GenreRepository;
+import ru.otus.lesson19hw.domain.*;
+import ru.otus.lesson19hw.repository.*;
 
 import java.util.Random;
 
@@ -52,6 +46,14 @@ public class Main {
             }
             bookRepository.save(book);
         }
+        //*/
+        /*
+        UserRepository userRepository = context.getBean(UserRepository.class);
+        User user = new User();
+        user.setUserName("userName");
+        user.setPassword("userPassword");
+        userRepository.save(user);
+        System.out.println(userRepository.findUserByUserName("userName").getPassword());
         //*/
     }
 }
