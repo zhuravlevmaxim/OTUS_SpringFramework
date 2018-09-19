@@ -1,104 +1,99 @@
 package ru.otus.lesson17hw.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import ru.otus.lesson17hw.domain.Author;
 import ru.otus.lesson17hw.domain.Book;
 import ru.otus.lesson17hw.domain.Comment;
 import ru.otus.lesson17hw.domain.Genre;
-import ru.otus.lesson17hw.repository.BookRepository;
-import ru.otus.lesson17hw.repository.CommentRepository;
+import ru.otus.lesson17hw.repository.BookReactiveRepository;
+import ru.otus.lesson17hw.repository.CommentReactiveRepository;
 
-import java.util.List;
-
-//@Service
-//@Transactional(readOnly = true)
+@Service
 public class BookService {
 
-//    @Autowired
-//    private BookRepository bookRepository;
-//    @Autowired
-//    private CommentRepository commentRepository;
-//    @Autowired
-//    private MongoOperations mongoOperations;
-//
-//    private static final String ID = "_id";
-//    private static final String NAME = "name";
-//    private static final String DESCRIPTION = "description";
-//    private static final String CONTENT = "content";
-//
-//    public List<Book> getBooks(){
-//        return bookRepository.findAll();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public List<Book> deleteBook(String id){
-//        bookRepository.deleteById(id);
-//        return bookRepository.findAll();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book editBook(Book book){
-//        Query query = new Query();
-//        query.addCriteria(Criteria.where(ID).is(book.getId()));
-//        Update update  = new Update();
-//        update.set(NAME, book.getName());
-//        update.set(DESCRIPTION, book.getDescription());
-//        update.set(CONTENT, book.getContent());
-//        mongoOperations.updateFirst(query, update, Book.class);
-//        return bookRepository.findById(book.getId()).get();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book editGenreInBook(String id, Genre genre){
-//        Book book = bookRepository.findById(id).get();
-//        book.setGenre(genre);
-//        book = bookRepository.save(book);
-//        return book;
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book addAuthorInBook(String id, Author author){
-//        Book book = bookRepository.findById(id).get();
-//        book.setAuthor(author);
-//        book = bookRepository.save(book);
-//        return book;
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book deleteAuthorFromBook(String id, Author author){
-//        Book book = bookRepository.findById(id).get();
-//        book.getAuthors().remove(author);
-//        book = bookRepository.save(book);
-//        return book;
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book addCommentInBook(String id, Comment comment){
-//        Book book = bookRepository.findById(id).get();
-//        comment = commentRepository.save(comment);
-//        book.setComment(comment);
-//        book = bookRepository.save(book);
-//        return book;
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Book deleteCommentFromBook(String id,Comment comment){
-//        Book book = bookRepository.findById(id).get();
-//        book.getComments().remove(comment);
-//        book = bookRepository.save(book);
-//        commentRepository.delete(comment);
-//        return book;
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public List<Book> createNewBook(Book book){
-//        bookRepository.save(book);
-//        return bookRepository.findAll();
-//    }
+    @Autowired
+    private BookReactiveRepository bookRepository;
+    @Autowired
+    private CommentReactiveRepository commentRepository;
+    @Autowired
+    private ReactiveMongoOperations mongoOperations;
+
+    private static final String ID = "_id";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String CONTENT = "content";
+
+    public Flux<Book> getBooks(){
+        return bookRepository.findAll();
+    }
+
+    public Flux<Book> deleteBook(String id){
+        bookRepository.deleteById(id);
+        return bookRepository.findAll();
+    }
+
+    public Mono<Book> editBook(Book book){
+        Query query = new Query();
+        query.addCriteria(Criteria.where(ID).is(book.getId()));
+        Update update  = new Update();
+        update.set(NAME, book.getName());
+        update.set(DESCRIPTION, book.getDescription());
+        update.set(CONTENT, book.getContent());
+        mongoOperations.updateFirst(query, update, Book.class);
+        return bookRepository.findById(book.getId());
+    }
+
+    public Mono<Book> editGenreInBook(String id, Genre genre){
+        Mono<Book> bookMono = bookRepository.findById(id);
+        Book book = bookMono.block();
+        book.setGenre(genre);
+        bookMono = bookRepository.save(book);
+        return bookMono;
+    }
+
+    public Mono<Book> addAuthorInBook(String id, Author author){
+        Mono<Book> bookMono = bookRepository.findById(id);
+        Book book = bookMono.block();
+        book.setAuthor(author);
+        bookMono = bookRepository.save(book);
+        return bookMono;
+    }
+
+    public Mono<Book> deleteAuthorFromBook(String id, Author author){
+        Mono<Book> bookMono = bookRepository.findById(id);
+        Book book = bookMono.block();
+        book.getAuthors().remove(author);
+        bookMono = bookRepository.save(book);
+        return bookMono;
+    }
+
+    public Mono<Book> addCommentInBook(String id, Comment comment){
+        Mono<Book> bookMono = bookRepository.findById(id);
+        Book book = bookMono.block();
+        Mono<Comment> commentMono = commentRepository.save(comment);
+        book.setComment(comment);
+        bookMono = bookRepository.save(book);
+        return bookMono;
+    }
+
+    public Mono<Book> deleteCommentFromBook(String id,Comment comment){
+        Mono<Book> bookMono = bookRepository.findById(id);
+        Book book = bookMono.block();
+        book.getComments().remove(comment);
+        bookMono = bookRepository.save(book);
+        commentRepository.delete(comment);
+        return bookMono;
+    }
+
+    public Flux<Book> createNewBook(Book book){
+        bookRepository.save(book);
+        return bookRepository.findAll();
+    }
 }

@@ -1,52 +1,47 @@
 package ru.otus.lesson17hw.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import ru.otus.lesson17hw.domain.Genre;
-import ru.otus.lesson17hw.repository.GenreRepository;
+import ru.otus.lesson17hw.repository.GenreReactiveRepository;
 
-import java.util.List;
-
-//@Service
-//@Transactional(readOnly = true)
+@Service
 public class GenreService {
 
-//    @Autowired
-//    private GenreRepository genreRepository;
-//    @Autowired
-//    private MongoOperations mongoOperations;
-//
-//    private static final String ID = "id";
-//    private static final String GENRE = "genre";
-//
-//    public List<Genre> getGenres(){
-//        return genreRepository.findAll();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public List<Genre> deleteGenre(String id){
-//        genreRepository.deleteById(id);
-//        return genreRepository.findAll();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public Genre editGenre(Genre genre){
-//        Query query = new Query();
-//        query.addCriteria(Criteria.where(ID).is(genre.getId()));
-//        Update update  = new Update();
-//        update.set(GENRE, genre.getGenre());
-//        mongoOperations.updateFirst(query, update, Genre.class);
-//        return genreRepository.findById(genre.getId()).get();
-//    }
-//
-//    @Transactional(readOnly = false)
-//    public List<Genre> createNewGenre(Genre genre){
-//        genreRepository.save(genre);
-//        return genreRepository.findAll();
-//    }
+    @Autowired
+    private GenreReactiveRepository genreRepository;
+    @Autowired
+    private ReactiveMongoOperations mongoOperations;
+
+    private static final String ID = "_id";
+    private static final String GENRE = "genre";
+
+    public Flux<Genre> getGenres(){
+        return genreRepository.findAll();
+    }
+
+    public Flux<Genre> deleteGenre(String id){
+        genreRepository.deleteById(id);
+        return genreRepository.findAll();
+    }
+
+    public Mono<Genre> editGenre(Genre genre){
+        Query query = new Query();
+        query.addCriteria(Criteria.where(ID).is(genre.getId()));
+        Update update  = new Update();
+        update.set(GENRE, genre.getGenre());
+        mongoOperations.updateFirst(query, update, Genre.class);
+        return genreRepository.findById(genre.getId());
+    }
+
+    public Flux<Genre> createNewGenre(Genre genre){
+        genreRepository.save(genre);
+        return genreRepository.findAll();
+    }
 }
