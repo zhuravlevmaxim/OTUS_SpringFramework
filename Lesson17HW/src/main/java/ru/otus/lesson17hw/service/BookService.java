@@ -35,8 +35,7 @@ public class BookService {
     }
 
     public Flux<Book> deleteBook(String id){
-        bookRepository.deleteById(id);
-        return bookRepository.findAll();
+        return bookRepository.deleteById(id).thenMany(bookRepository.findAll()).cache();
     }
 
     public Mono<Book> editBook(Book book){
@@ -46,8 +45,8 @@ public class BookService {
         update.set(NAME, book.getName());
         update.set(DESCRIPTION, book.getDescription());
         update.set(CONTENT, book.getContent());
-        mongoOperations.updateFirst(query, update, Book.class);
-        return bookRepository.findById(book.getId());
+        return mongoOperations.updateFirst(query, update, Book.class)
+                .then(bookRepository.findById(book.getId())).cache();
     }
 
     public Mono<Book> editGenreInBook(String id, Genre genre){
@@ -78,7 +77,7 @@ public class BookService {
         Mono<Book> bookMono = bookRepository.findById(id);
         Book book = bookMono.block();
         Mono<Comment> commentMono = commentRepository.save(comment);
-        book.setComment(comment);
+        book.setComment(commentMono.block());
         bookMono = bookRepository.save(book);
         return bookMono;
     }
@@ -93,7 +92,6 @@ public class BookService {
     }
 
     public Flux<Book> createNewBook(Book book){
-        bookRepository.save(book);
-        return bookRepository.findAll();
+        return bookRepository.save(book).thenMany(bookRepository.findAll()).cache();
     }
 }

@@ -27,8 +27,7 @@ public class GenreService {
     }
 
     public Flux<Genre> deleteGenre(String id){
-        genreRepository.deleteById(id);
-        return genreRepository.findAll();
+        return genreRepository.deleteById(id).thenMany(genreRepository.findAll()).cache();
     }
 
     public Mono<Genre> editGenre(Genre genre){
@@ -36,12 +35,12 @@ public class GenreService {
         query.addCriteria(Criteria.where(ID).is(genre.getId()));
         Update update  = new Update();
         update.set(GENRE, genre.getGenre());
-        mongoOperations.updateFirst(query, update, Genre.class);
-        return genreRepository.findById(genre.getId());
+        return mongoOperations.updateFirst(query, update, Genre.class)
+                .then(genreRepository.findById(genre.getId()))
+                .cache();
     }
 
     public Flux<Genre> createNewGenre(Genre genre){
-        genreRepository.save(genre);
-        return genreRepository.findAll();
+        return genreRepository.save(genre).thenMany(genreRepository.findAll()).cache();
     }
 }

@@ -28,8 +28,7 @@ public class AuthorService {
     }
 
     public Flux<Author> deleteAuthor(String id){
-        authorRepository.deleteById(id);
-        return authorRepository.findAll();
+        return  authorRepository.deleteById(id).thenMany(authorRepository.findAll()).cache();
     }
 
     public Mono<Author> editAuthor(Author author) {
@@ -38,12 +37,12 @@ public class AuthorService {
         Update update = new Update();
         update.set(FIRST_NAME, author.getFirstName());
         update.set(SECOND_NAME, author.getSecondName());
-        mongoOperations.updateFirst(query, update, Author.class);
-        return authorRepository.findById(author.getId());
+        return mongoOperations.updateFirst(query, update, Author.class)
+                .then(authorRepository.findById(author.getId()))
+                .cache();
     }
 
     public Flux<Author> createNewAuthor(Author author){
-        authorRepository.save(author);
-        return authorRepository.findAll();
+        return authorRepository.save(author).thenMany(authorRepository.findAll()).cache();
     }
 }
