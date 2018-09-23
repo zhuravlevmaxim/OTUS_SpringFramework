@@ -13,6 +13,7 @@ import ru.otus.lesson19hw.repository.AuthorRepository;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class AuthorService{
 
     @Autowired
