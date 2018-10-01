@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var authors = /*[[${authors}]]*/ 'default';
+        var genres = /*[[${genres}]]*/ 'default';
+        /*]]>*/
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/book/createBook.js"></script>
+    <script src="js/book/createBookForm.js"></script>
+</head>
+<body>
+<h1>BOOK:</h1>
+<div>
+    <p><a href="#" th:href="@{/books}">List of book</a></p>
+</div>
+<div id="createBookFormDiv">
+    <script>
+        createBookForm();
+    </script>
+    <!--form>
+        <p>Book name: <input type="text" id="name"/></p>
+        <p>Book content: <input type="text" id="content"/></p>
+        <p>Book description: <input type="text" id="description"/></p>
+        <p>
+            <label for="genre-input">Genre: </label>
+            <select id="genre-input">
+                <option th:each="genre : ${genres}"
+                        th:value="${genre}"
+                        th:text="${genre.genre}">Test genre</option>
+            </select>
+        </p>
+        </p>
+        <div>
+            <p>
+                <label for="authors-input">Authors: </label>
+                <select multiple id="authors-input" th:field="*{authors}">
+                    <option th:each="author : ${authors}"
+                            th:value="${{author}}"
+                            th:text="${author.id} +': '+${author.firstName} +' '+ ${author.secondName}">Test authors</option>
+                </select>
+            </p>
+        </div>
+        <p><input type="submit" value="Create book"/></p>
+    </form-->
+</div>
+</body>
+</html>
