@@ -3,8 +3,14 @@ package ru.otus.lesson21hw;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import ru.otus.lesson21hw.domain.*;
+import ru.otus.lesson21hw.repository.*;
+
+import java.util.Random;
 
 @SpringBootApplication
+@EnableGlobalAuthentication
 public class Main {
 
     public static void main(String[] args) {
@@ -48,6 +54,7 @@ public class Main {
         User user = new User();
         user.setUserName("userName");
         user.setPassword("userPassword");
+        user.setRole("USER");
         userRepository.save(user);
         System.out.println(userRepository.findUserByUserName("userName").getPassword());
         //*/

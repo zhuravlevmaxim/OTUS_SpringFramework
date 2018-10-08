@@ -7,8 +7,7 @@ import ru.otus.lesson21hw.domain.User;
 import java.util.Collection;
 import java.util.Collections;
 
-public class MyUserDetails
-        implements UserDetails
+public class MyUserDetails implements UserDetails
 {
 
     private User user;
