@@ -9,7 +9,7 @@ import ru.otus.lesson21hw.domain.User;
 import ru.otus.lesson21hw.repository.UserRepository;
 
 @Service
-public class UserService implements UserDetailsService
+public class UserDetailsServiceImpl implements UserDetailsService
 {
     @Autowired
     private UserRepository userRepository;
@@ -20,6 +20,7 @@ public class UserService implements UserDetailsService
         if (user == null) {
             throw new UsernameNotFoundException(userName);
         }
-        return new MyUserDetails(user);
+        MyUserDetails myUserDetails = new MyUserDetails(user);
+        return myUserDetails;
     }
 }

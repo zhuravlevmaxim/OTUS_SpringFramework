@@ -2,7 +2,6 @@ package ru.otus.lesson21hw.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,16 +13,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private UserDetailsServiceImpl userService;
 
     @Override
-    public void configure(WebSecurity web) {
+    public void configure(WebSecurity web) throws Exception {
+        super.configure(web);
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
+        http.csrf().disable()
+                .authorizeRequests().antMatchers("/").authenticated()
+                .and().authorizeRequests().antMatchers("/user").hasRole("ADMIN")
+                .and()
                     .formLogin()
                     .loginPage("/mylogin")
                         .permitAll()
@@ -34,12 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .logout()
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
-                    .logoutSuccessUrl("/mylogin?logout")
-                    .permitAll()
-                .and().authorizeRequests().antMatchers("/index").hasRole("{USER, ADMIN}")
-                //.and().authorizeRequests().antMatchers("/").hasRole("{USER, ADMIN}")
-                .and()
-                    .httpBasic();
+                    .logoutUrl("/logout")
+                        .permitAll();
     }
 
     @Bean

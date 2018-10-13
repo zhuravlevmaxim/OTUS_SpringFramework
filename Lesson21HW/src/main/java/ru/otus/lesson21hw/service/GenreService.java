@@ -25,19 +25,19 @@ public class GenreService {
     private static final String ID = "id";
     private static final String GENRE = "genre";
 
-    @Secured("hasRole({ROLE_USER, ROLE_ADMIN})")
+    @Secured({"ROLE_USER, ROLE_ADMIN"})
     public List<Genre> getGenres(){
         return genreRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Genre> deleteGenre(String id){
         genreRepository.deleteById(id);
         return genreRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Genre editGenre(Genre genre){
         Query query = new Query();
@@ -48,7 +48,7 @@ public class GenreService {
         return genreRepository.findById(genre.getId()).get();
     }
 
-    @Secured("hasRole({ROLE_ADMIN})")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Genre> createNewGenre(Genre genre){
         genreRepository.save(genre);

@@ -45,6 +45,6 @@ public class FormTest {
     @Test
     public void logoutTest() throws Exception {
         mockMvc
-                .perform(logout("/mylogin?logout"));
+                .perform(logout("/logout"));
     }
 }

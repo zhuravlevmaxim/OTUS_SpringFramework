@@ -3,14 +3,15 @@ package ru.otus.lesson21hw;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import ru.otus.lesson21hw.domain.*;
 import ru.otus.lesson21hw.repository.*;
 
 import java.util.Random;
 
 @SpringBootApplication
-@EnableGlobalAuthentication
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class Main {
 
     public static void main(String[] args) {
@@ -52,11 +53,11 @@ public class Main {
         /*
         UserRepository userRepository = context.getBean(UserRepository.class);
         User user = new User();
-        user.setUserName("userName");
-        user.setPassword("userPassword");
-        user.setRole("USER");
+        user.setUserName("admin");
+        user.setPassword("admin");
+        user.setRole("ADMIN");
         userRepository.save(user);
-        System.out.println(userRepository.findUserByUserName("userName").getPassword());
+        System.out.println(userRepository.findUserByUserName("admin").getPassword());
         //*/
     }
 }

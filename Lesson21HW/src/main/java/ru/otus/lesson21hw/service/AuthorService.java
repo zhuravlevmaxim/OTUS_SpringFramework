@@ -26,19 +26,19 @@ public class AuthorService{
     private final static String FIRST_NAME = "firstName";
     private final static String SECOND_NAME = "secondName";
 
-    @Secured("hasRole({ROLE_USER, ROLE_ADMIN})")
+    @Secured({"ROLE_USER, ROLE_ADMIN"})
     public List<Author> getAuthors(){
         return authorRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Author> deleteAuthor(String id){
         authorRepository.deleteById(id);
         return authorRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Author editAuthor(Author author) {
         Query query = new Query();
@@ -50,7 +50,7 @@ public class AuthorService{
         return authorRepository.findById(author.getId()).get();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Author> createNewAuthor(Author author){
         authorRepository.save(author);

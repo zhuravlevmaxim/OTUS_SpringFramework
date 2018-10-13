@@ -32,19 +32,19 @@ public class BookService {
     private static final String DESCRIPTION = "description";
     private static final String CONTENT = "content";
 
-    @Secured("hasRole({ROLE_USER, ROLE_ADMIN})")
+    @Secured({"ROLE_USER, ROLE_ADMIN"})
     public List<Book> getBooks(){
         return bookRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Book> deleteBook(String id){
         bookRepository.deleteById(id);
         return bookRepository.findAll();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book editBook(Book book){
         Query query = new Query();
@@ -57,7 +57,7 @@ public class BookService {
         return bookRepository.findById(book.getId()).get();
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book editGenreInBook(String id, Genre genre){
         Book book = bookRepository.findById(id).get();
@@ -66,7 +66,7 @@ public class BookService {
         return book;
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book addAuthorInBook(String id, Author author){
         Book book = bookRepository.findById(id).get();
@@ -75,7 +75,7 @@ public class BookService {
         return book;
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book deleteAuthorFromBook(String id, Author author){
         Book book = bookRepository.findById(id).get();
@@ -84,7 +84,7 @@ public class BookService {
         return book;
     }
 
-    @Secured("hasRole({ROLE_USER, ROLE_ADMIN})")
+    @Secured({"ROLE_USER, ROLE_ADMI"})
     @Transactional(readOnly = false)
     public Book addCommentInBook(String id, Comment comment){
         Book book = bookRepository.findById(id).get();
@@ -94,7 +94,7 @@ public class BookService {
         return book;
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book deleteCommentFromBook(String id,Comment comment){
         Book book = bookRepository.findById(id).get();
@@ -104,7 +104,7 @@ public class BookService {
         return book;
     }
 
-    @Secured("hasRole(ROLE_ADMIN)")
+    @Secured({"ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public List<Book> createNewBook(Book book){
         bookRepository.save(book);
