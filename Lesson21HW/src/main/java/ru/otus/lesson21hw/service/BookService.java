@@ -32,7 +32,7 @@ public class BookService {
     private static final String DESCRIPTION = "description";
     private static final String CONTENT = "content";
 
-    @Secured({"ROLE_USER, ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Book> getBooks(){
         return bookRepository.findAll();
     }
@@ -84,7 +84,7 @@ public class BookService {
         return book;
     }
 
-    @Secured({"ROLE_USER, ROLE_ADMI"})
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     @Transactional(readOnly = false)
     public Book addCommentInBook(String id, Comment comment){
         Book book = bookRepository.findById(id).get();

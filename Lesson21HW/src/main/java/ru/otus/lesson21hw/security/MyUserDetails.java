@@ -13,13 +13,15 @@ public class MyUserDetails implements UserDetails
 
     private User user;
 
+    private static final String ROLE = "ROLE_";
+
     public MyUserDetails(User user){
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
+        return Arrays.asList(new SimpleGrantedAuthority(ROLE + user.getRole()));
     }
 
     @Override

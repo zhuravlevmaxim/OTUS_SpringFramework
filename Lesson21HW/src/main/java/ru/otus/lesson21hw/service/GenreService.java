@@ -25,7 +25,7 @@ public class GenreService {
     private static final String ID = "id";
     private static final String GENRE = "genre";
 
-    @Secured({"ROLE_USER, ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Genre> getGenres(){
         return genreRepository.findAll();
     }

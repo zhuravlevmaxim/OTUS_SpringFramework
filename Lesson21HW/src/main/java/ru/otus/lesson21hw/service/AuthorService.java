@@ -26,7 +26,7 @@ public class AuthorService{
     private final static String FIRST_NAME = "firstName";
     private final static String SECOND_NAME = "secondName";
 
-    @Secured({"ROLE_USER, ROLE_ADMIN"})
+    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Author> getAuthors(){
         return authorRepository.findAll();
     }
