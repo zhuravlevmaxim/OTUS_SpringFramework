@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Genre</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/genre/editGenre.js"></script>
+</head>
+<body>
+<div>
+    <p><a href="#" th:href="@{/genres}">Go to the list of genre</a></p>
+</div>
+<div>
+    <h1 th:text="'Genre id: ' + ${genre.id}">Test genre</h1>
+</div>
+<div class="genreDiv">
+    <form th:object="${genre}" id="editGenreForm">
+        <p>Genre id: <input type="text" th:field="*{id}" id="id" disabled/></p>
+        <p>Genre: <input type="text" th:field="*{genre}" id="genre"/></p>
+        <p><input type="submit" value="Edit genre" class="editGenre"/></p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+dbconfig:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/otus6
+      userName: root
+      password: root
+      serverTimeZoneKey: serverTimezone
+      serverTimeZoneValue: UTC

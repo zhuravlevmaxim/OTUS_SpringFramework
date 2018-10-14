@@ -1,25 +1,21 @@
-package ru.otus.lesson12hw;
+package ru.otus.lesson15hw.repository;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.otus.lesson12hw.domain.Author;
-import ru.otus.lesson12hw.domain.Book;
-import ru.otus.lesson12hw.domain.Comment;
-import ru.otus.lesson12hw.domain.Genre;
-import ru.otus.lesson12hw.repository.BookRepository;
+import ru.otus.lesson15hw.domain.Author;
+import ru.otus.lesson15hw.domain.Book;
+import ru.otus.lesson15hw.domain.Comment;
+import ru.otus.lesson15hw.domain.Genre;
 
-/**
- * Created by zhmv on 12.08.2018.
- */
 @RunWith(SpringRunner.class)
 @DataMongoTest
-public class BookTest {
+public class BookRepositoryTest {
 
     private static final String FIRST_NAME = "firstName";
     private static final String SECOND_NAME = "secondName";
@@ -31,6 +27,13 @@ public class BookTest {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+    @Autowired
+    private GenreRepository genreRepository;
+    @Autowired
+    private CommentRepository commentRepository;
+
     private Author author;
     private Book book;
     private Comment comment;
@@ -41,12 +44,15 @@ public class BookTest {
         author = new Author();
         author.setFirstName(FIRST_NAME);
         author.setSecondName(SECOND_NAME);
+        author = authorRepository.save(author);
 
         comment = new Comment();
         comment.setComment(COMMENT);
+        comment = commentRepository.save(comment);
 
         genre = new Genre();
         genre.setGenre(GENRE);
+        genre = genreRepository.save(genre);
 
         book = new Book();
         book.setName(BOOK_NAME);
@@ -57,6 +63,14 @@ public class BookTest {
         book.setGenre(genre);
 
         book = bookRepository.save(book);
+    }
+
+    @After
+    public void destroy(){
+        bookRepository.deleteAll();
+        authorRepository.deleteAll();
+        genreRepository.deleteAll();
+        commentRepository.deleteAll();
     }
 
     @Test
@@ -85,12 +99,12 @@ public class BookTest {
 
     @Test
     public void testCount(){
-        Assert.assertTrue(bookRepository.count() > 0);
+        Assert.assertEquals(bookRepository.count(), 1);
     }
 
     @Test
     public void testDeleteAll(){
         bookRepository.deleteAll();
-        Assert.assertTrue(bookRepository.count() == 0);
+        Assert.assertEquals(bookRepository.count(), 0);
     }
 }

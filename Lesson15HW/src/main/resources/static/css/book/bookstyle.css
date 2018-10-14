@@ -1,0 +1,11 @@
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+body {
+    background-color: mintcream;
+}
+div.bookdiv {
+    margin-left:20px;
+    margin-right:auto;
+}
