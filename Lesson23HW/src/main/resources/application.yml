@@ -1,0 +1,19 @@
+spring:
+      data:
+          mongodb:
+                authentication: none
+                database: otus23
+                port: 27017
+                host: localhost
+      datasource:
+                url: jdbc:mysql://localhost:3306/otus23?serverTimezone=UTC&useSSL=false
+                username: root
+                password: root
+                driver-class-name: com.mysql.cj.jdbc.Driver
+      jpa:
+          properties:
+                    hibernate:
+                            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hibernate.ddl-auto: update
+      batch:
+            initialize-schema: ALWAYS
