@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <link rel="stylesheet" type="text/css" href="css/book/bookstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var authors = /*[[${book.authors}]]*/ 'default';
+        var comments = /*[[${book.comments}]]*/ 'default';
+        var book = /*[[${book}]]*/ 'default';
+        /*]]>*/
+    </script>
+    <script src="js/book/editBook.js"></script>
+    <script src="js/book/editGenreFromBook.js"></script>
+    <script src="js/book/deleteAuthorFromBook.js"></script>
+    <script src="js/book/addAuthorInBook.js"></script>
+    <script src="js/book/deleteCommentFromBook.js"></script>
+    <script src="js/book/addCommentInBook.js"></script>
+    <script src="js/book/createTableAuthorsFromBook.js"></script>
+    <script src="js/book/createTableCommentsFromBook.js"></script>
+</head>
+<body>
+    <div>
+        <p><a href="#" th:href="@{/books}">Go to the list of book</a></p>
+    </div>
+    <div>
+        <h1 th:text="'Book id: ' + ${book.id}">Test book</h1>
+    </div>
+    <div>
+        <form action="/deleteBook" th:action="@{/deleteBook(id=${book.id})}" method="post">
+            <input type="submit" value="Delete book" />
+        </form>
+    </div>
+    <div class="bookdiv">
+        <form th:object="${book}" id="editBookForm">
+            <p>Book id: <input type="text" th:field="*{id}" id="id" disabled/></p>
+            <p>Book name: <input type="text" th:field="*{name}" id="name"/></p>
+            <p>Book content: <input type="text" th:field="*{content}" id="content"/></p>
+            <p>Book description: <input type="text" th:field="*{description}" id="description"/></p>
+            <p><input type="submit" value="Edit book" class="editBook"/></p>
+        </form>
+        <div id = "div">
+            <h2>Genre</h2>
+            <form th:object="${book}" id="editGenreBookForm">
+                <p>
+                    <label for="genre-input">Genre: </label>
+                    <select id="genre-input" th:field="*{genre}">
+                        <option th:each="genre : ${genres}" th:value="${{genre}}" th:text="${genre.genre}">Test genre</option>
+                    </select>
+                </p>
+                <p><input type="submit" value="Edit genre" class="editGenreBook"/></p>
+            </form>
+        </div>
+        <div>
+            <fieldset>
+                <legend>List of author</legend>
+                <div id="authorsTableDiv">
+                    <script>
+                        createTableAuthorsFromBook();
+                    </script>
+                </div>
+                <div>
+                    <p>
+                        <form th:object="${author}" id="addAuthorInBook">
+                            <label for="author-inputAdd">Author: </label>
+                            <select id="author-inputAdd">
+                                <option th:each="authorV : ${authors}"
+                                        th:value="${{authorV}}"
+                                        th:text="${authorV.firstName} +' : '+ ${authorV.secondName}">Test author</option>
+                            </select>
+                        <p><input type="submit" value="Add author"/></p>
+                        </form>
+                    </p>
+                </div>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+            <legend>List of comment</legend>
+                <div id="commentsTableDiv">
+                    <script>
+                        createTableCommentsFromBook();
+                    </script>
+                </div>
+            <!--table>
+                <tr>
+                    <th>Comment id</th><th>Comment</th>
+                </tr>
+                <tr th:each="comment : ${book.comments}">
+                    <form id="deleteCommentFromBook" th:object="${comment}">
+                        <td><input type="text" th:value="*{id}" id="commentId" disabled/></td>
+                        <td><input type="text" th:value="*{comment}" id="comment" disabled/></td>
+                        <td><input type="submit" value="Delete comment"/></td>
+                    </form>
+                </tr>
+            </table-->
+             <p>
+                 <form id="addCommentInBook">
+                    <p>Comment: <input type="text" id="addComment"/></p>
+                    <p><input type="submit" value="Add comment"/></p>
+                </form>
+             </p>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

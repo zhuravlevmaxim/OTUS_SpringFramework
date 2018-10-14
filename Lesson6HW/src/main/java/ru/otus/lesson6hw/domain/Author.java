@@ -1,0 +1,45 @@
+package ru.otus.lesson6hw.domain;
+
+/**
+ * Created by zhmv on 16.07.2018.
+ */
+public class Author {
+    private int id;
+    private String firstName;
+    private String secondName;
+
+    public Author(int id, String firstName, String secondName){
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("AUTHOR_ID: %d, FIRST_NAME: %s, SECOND_NAME: %s", this.id, this.firstName, this.secondName);
+    }
+}
