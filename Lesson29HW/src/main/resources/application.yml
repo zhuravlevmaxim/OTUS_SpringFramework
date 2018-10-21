@@ -1,0 +1,9 @@
+spring:
+      data:
+          mongodb:
+                 uri: mongodb://mongocontainer:27017/otus29
+management:
+    endpoints:
+          web:
+            exposure:
+                  include: "*"
