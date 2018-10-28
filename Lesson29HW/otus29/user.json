@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f90"},"userName":"userName","password":"userPassword","role":"USER","_class":"ru.otus.lesson21hw.domain.User"}
+{"_id":{"$oid":"5bc2074945368312185752b8"},"userName":"admin","password":"admin","role":"ADMIN","_class":"ru.otus.lesson21hw.domain.User"}

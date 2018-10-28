@@ -1,0 +1,10 @@
+{"_id":{"$oid":"5bbb98e5622ca516fcca7ea2"},"genre":"genre: 0","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7ec0"},"genre":"genre: 1","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7ee2"},"genre":"genre: 2","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7efe"},"genre":"genre: 3","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f1c"},"genre":"genre: 4","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f34"},"genre":"genre: 5","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f4e"},"genre":"genre: 6","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f60"},"genre":"genre: 7","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f70"},"genre":"genre: 8","_class":"ru.otus.lesson21hw.domain.Genre"}
+{"_id":{"$oid":"5bbb98e6622ca516fcca7f7c"},"genre":"genre: 9","_class":"ru.otus.lesson21hw.domain.Genre"}
